@@ -139,7 +139,7 @@
                 </c:otherwise>
             </c:choose>
 
-            <div class="detail">
+            <div class="detail" style="color: #fff">
                 <c:out value="${model.user.username}" escapeXml="true"/>
             </div>
             <c:if test="${model.user.settingsRole}"></a></c:if>
@@ -148,7 +148,7 @@
         <td style="padding-left:15pt;padding-right:5pt;vertical-align: right;width: 100%;text-align: center">
             <a href="<c:url value='/logout'/>" target="_top">
                 <img src="<spring:theme code='logoutImage'/>" alt="logout" height="24">
-                <div class="detail">
+                <div class="detail" style="color: #fff">
                     <fmt:message key="top.logout" var="logout"></fmt:message>
                     <c:out value="${logout}"/>
                 </div>
