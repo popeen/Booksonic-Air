@@ -27,17 +27,6 @@
     </script>
 </head>
 <body class="mainframe bgcolor1" onload="init();">
-<c:if test="${not empty model.welcomeTitle}">
-<h1>
-    <img src="<spring:theme code='homeImage'/>" alt="">
-    <span style="vertical-align: middle">${model.welcomeTitle}</span>
-</h1>
-</c:if>
-
-<c:if test="${not empty model.welcomeSubtitle}">
-    <h2>${model.welcomeSubtitle}</h2>
-</c:if>
-
 <p>
     <c:forTokens items="random newest starred highest frequent recent decade genre alphabetical" delims=" " var="cat" varStatus="loopStatus">
         <c:if test="${loopStatus.count > 1}">&nbsp;|&nbsp;</c:if>
