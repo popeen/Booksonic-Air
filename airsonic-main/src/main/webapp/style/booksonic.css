@@ -19,3 +19,8 @@
     font-style: italic;
     float: left;
 }
+
+.coverart{
+	border-radius: 0px !important;
+	border: 1px solid #aaa;
+}
