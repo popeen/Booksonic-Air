@@ -142,13 +142,13 @@ public class SettingsService {
     private static final String DEFAULT_VIDEO_FILE_TYPES = "flv avi mpg mpeg mp4 m4v mkv mov wmv ogv divx m2ts webm";
     private static final String DEFAULT_COVER_ART_FILE_TYPES = "cover.jpg cover.png cover.gif folder.jpg jpg jpeg gif png";
     private static final int DEFAULT_COVER_ART_CONCURRENCY = 4;
-    private static final String DEFAULT_WELCOME_TITLE = "Welcome to Airsonic!";
+    private static final String DEFAULT_WELCOME_TITLE = "Welcome to Booksonic!";
     private static final String DEFAULT_WELCOME_SUBTITLE = null;
-    private static final String DEFAULT_WELCOME_MESSAGE = "__Welcome to Airsonic!__\n" +
+    private static final String DEFAULT_WELCOME_MESSAGE = "__Welcome to Booksonic!__\n" +
             "\\\\ \\\\\n" +
-            "Airsonic is a free, web-based media streamer, providing ubiquitous access to your music. \n" +
+            "Booksonic is a free, web-based media streamer based on <a href='https://airsonic.github.io/' target='_blank'>Airsonic</a>, providing ubiquitous access to your audiobooks. \n" +
             "\\\\ \\\\\n" +
-            "Use it to share your music with friends, or to listen to your own music while at work. You can stream to multiple " +
+            "You can stream to multiple " +
             "players simultaneously, for instance to one player in your kitchen and another in your living room.\n" +
             "\\\\ \\\\\n" +
             "To change or remove this message, log in with administrator rights and go to {link:Settings > General|generalSettings.view}.";
@@ -195,7 +195,7 @@ public class SettingsService {
     private static final String DEFAULT_SMTP_PORT = "25";
     private static final String DEFAULT_SMTP_USER = null;
     private static final String DEFAULT_SMTP_PASSWORD = null;
-    private static final String DEFAULT_SMTP_FROM = "airsonic@airsonic.org";
+    private static final String DEFAULT_SMTP_FROM = "support@booksonic.org";
 
     private static final boolean DEFAULT_CAPTCHA_ENABLED = false;
     private static final String DEFAULT_RECAPTCHA_SITE_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";

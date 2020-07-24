@@ -7,7 +7,7 @@
 </head>
 
 <frameset rows="80,*,0" border="0" framespacing="0" frameborder="0">
-    <frame name="upper" src="top.view?" class="bgcolor2">
+    <frame name="upper" src="top.view?" class="upper">
     <frameset id="mainFrameset" cols=${model.showSideBar ? "230,*" : "0,*"} border="0" framespacing="0" frameborder="0">
         <frame name="left" src="left.view?" marginwidth="0" marginheight="0" class="bgcolor2">
 

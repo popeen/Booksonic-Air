@@ -35,6 +35,8 @@ import org.airsonic.player.service.*;
 import org.airsonic.player.service.search.IndexType;
 import org.airsonic.player.util.StringUtil;
 import org.airsonic.player.util.Util;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
@@ -55,10 +57,12 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import java.io.File;
 import java.util.*;
 
 import static org.airsonic.player.security.RESTRequestParameterProcessingFilter.decrypt;
 import static org.springframework.web.bind.ServletRequestUtils.*;
+
 
 /**
  * Multi-controller used for the REST API.
@@ -543,6 +547,29 @@ public class SubsonicRESTController {
         jaxbAlbum.setStarred(jaxbWriter.convertDate(albumDao.getAlbumStarredDate(album.getId(), username)));
         jaxbAlbum.setYear(album.getYear());
         jaxbAlbum.setGenre(album.getGenre());
+        jaxbAlbum.setDescription(album.getDescription());
+        return jaxbAlbum;
+    }
+
+    private <T extends AlbumID3> T createJaxbBook(T jaxbAlbum, Album album, String username) {
+        jaxbAlbum.setId(String.valueOf(album.getId()));
+        jaxbAlbum.setName(album.getName());
+        if (album.getArtist() != null) {
+            jaxbAlbum.setArtist(album.getArtist());
+            org.airsonic.player.domain.Artist artist = artistDao.getArtist(album.getArtist());
+            if (artist != null) {
+                jaxbAlbum.setArtistId(String.valueOf(artist.getId()));
+            }
+        }
+        if (album.getCoverArtPath() != null) {
+            jaxbAlbum.setCoverArt(CoverArtController.ALBUM_COVERART_PREFIX + album.getId());
+        }
+        jaxbAlbum.setSongCount(album.getSongCount());
+        jaxbAlbum.setDuration(album.getDurationSeconds());
+        jaxbAlbum.setCreated(jaxbWriter.convertDate(album.getCreated()));
+        jaxbAlbum.setStarred(jaxbWriter.convertDate(albumDao.getAlbumStarredDate(album.getId(), username)));
+        jaxbAlbum.setYear(album.getYear());
+        jaxbAlbum.setGenre(album.getGenre());
         return jaxbAlbum;
     }
 
@@ -639,6 +666,72 @@ public class SubsonicRESTController {
         directory.setName(dir.getName());
         directory.setStarred(jaxbWriter.convertDate(mediaFileDao.getMediaFileStarredDate(id, username)));
         directory.setPlayCount((long) dir.getPlayCount());
+
+        if (dir.isAlbum()) {
+            directory.setAverageRating(ratingService.getAverageRating(dir));
+            directory.setUserRating(ratingService.getRatingForUser(username, dir));
+        }
+
+        for (MediaFile child : mediaFileService.getChildrenOf(dir, true, true, true)) {
+            directory.getChild().add(createJaxbChild(player, child, username));
+        }
+
+        Response res = createResponse();
+        res.setDirectory(directory);
+        jaxbWriter.writeResponse(request, response, res);
+    }
+
+    @RequestMapping("/getBookDirectory")
+    public void getBookDirectory(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request = wrapRequest(request);
+        Player player = playerService.getPlayer(request, response);
+        String username = securityService.getCurrentUsername(request);
+
+        int id = getRequiredIntParameter(request, "id");
+        MediaFile dir = mediaFileService.getMediaFile(id);
+        if (dir == null) {
+            error(request, response, ErrorCode.NOT_FOUND, "Directory not found");
+            return;
+        }
+        if (!securityService.isFolderAccessAllowed(dir, username)) {
+            error(request, response, ErrorCode.NOT_AUTHORIZED, "Access denied");
+            return;
+        }
+
+        MediaFile parent = mediaFileService.getParentOf(dir);
+        Directory directory = new Directory();
+        directory.setId(String.valueOf(id));
+        try {
+            if (!mediaFileService.isRoot(parent)) {
+                directory.setParent(String.valueOf(parent.getId()));
+            }
+        } catch (SecurityException x) {
+            // Ignored.
+        }
+        directory.setName(dir.getName());
+        directory.setStarred(jaxbWriter.convertDate(mediaFileDao.getMediaFileStarredDate(id, username)));
+        directory.setPlayCount((long) dir.getPlayCount());
+
+        String desc = "noInfo";
+        String reader = "";
+        String lang = "";
+        String fullPath = "";
+        try {
+            fullPath = FilenameUtils.getFullPath(dir.getPath() + System.getProperty("file.separator"));
+        } catch (Exception e){ }
+        try {
+            desc = FileUtils.readFileToString(new File(fullPath + "desc.txt"), "UTF-8");
+        } catch (Exception e){ }
+        try {
+            reader = FileUtils.readFileToString(new File(fullPath + "reader.txt"));
+        } catch (Exception e){ }
+        try {
+            lang = FileUtils.readFileToString(new File(fullPath + "lang.txt"), "UTF-8");
+        } catch (Exception e){ }
+
+        directory.setDescription(desc);
+        directory.setReader(reader);
+        directory.setLanguage(lang);
 
         if (dir.isAlbum()) {
             directory.setAverageRating(ratingService.getAverageRating(dir));

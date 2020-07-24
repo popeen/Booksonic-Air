@@ -1,0 +1,21 @@
+@import "default-without-mediaelement.css";
+@import "mediaelement-light.css";
+
+.upper{
+    background-color: #175d7b !important;
+    min-height: 75px !important;
+    border-bottom: 2px solid #3b474c !important;
+}
+.topHeader a{
+	color: #fff !important;
+}
+
+.logo {
+    margin: -5px 10% 0px 0px;
+    color: #fff;
+    padding: 15px 0px 15px 45px;
+    font: 30px/1.5 Lato, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    float: left;
+}

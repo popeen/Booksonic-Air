@@ -44,6 +44,8 @@ public class Album {
     private boolean present;
     private Integer folderId;
     private String musicBrainzReleaseId;
+    private String fullPath;
+    private String description;
 
     public Album() {
     }
@@ -84,6 +86,14 @@ public class Album {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getFullPath() {
+        return this.fullPath;
+    }
+
+    public void setFullPath(String path) {
+        this.fullPath = path;
     }
 
     public String getName() {
@@ -136,6 +146,14 @@ public class Album {
 
     public String getGenre() {
         return genre;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public void setGenre(String genre) {
