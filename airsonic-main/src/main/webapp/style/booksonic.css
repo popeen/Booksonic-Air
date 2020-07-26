@@ -1,5 +1,6 @@
 @import "default-without-mediaelement.css";
 @import "mediaelement-light.css";
+@import "bridge.css";
 
 .upper{
     background-color: #175d7b !important;

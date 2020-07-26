@@ -1,0 +1,206 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+container{
+	margin:auto;
+}
+.overlay{
+    background:rgba(0, 0, 0, 0.5);
+	with:100%;
+	min-height:460px;
+}
+/* Header */
+header{
+	background:#175d7b;
+	margin:0px;
+	min-height:75px;
+	border-bottom:2px solid #3b474c;
+}
+
+header h1{
+	margin:0px;
+	margin-right:10%;
+	color:#fff;
+	padding:15px 0px 15px 45px;
+	font:30px/1.5 Lato, sans-serif;
+	font-weight:bold;
+	font-style:italic;
+	float:left;
+}
+
+header nav ul li{
+	color: #fff;
+	display:inline;
+	float: left;
+	font:14px/1.5 Lato, sans-serif;
+	margin-top:30px;
+	padding-right:35px;	
+}
+
+header #search{
+	color: #fff;
+	margin-top:27px;
+	float:right;
+	margin-right:35px;
+}
+header #search input{
+	color: #000;
+	border: 1px solid #3b474c;
+	margin-right:15px;
+	padding:5px;
+}
+
+/* water */
+#water{	
+	margin:0px;
+	min-height:460px;
+	background-size: cover;
+	background-image:url('../style/images/vattern1920_thin.jpg');
+	border-bottom:2px solid #898989;
+}
+#water #loginBox{
+	background:#fff;
+	width:360px;
+	float:left;
+	margin-top:115px;
+	margin-left:7%;
+	text-align:center;
+}
+#water #loginBox h1{
+	font:14px/1.5 Lato, sans-serif;
+	margin:25px;
+	color:#4c4c4c;
+}
+#water #loginBox input[type="text"]{
+	border: 1px solid #d2d6de;
+	height:32px;
+	width:318px;
+	padding-left:12px;
+	margin-bottom:15px;
+}
+#water #loginBox input[type="password"]{
+	border: 1px solid #d2d6de;
+	height:32px;
+	width:318px;
+	padding-left:12px;
+	margin-bottom:15px;
+}
+#water #loginBox button{
+	font:14px Lato, sans-serif;
+	border: 1px solid #175d7b;
+	background: #3c8bac;
+	color:#fff;
+	width:85px;
+	height:32px;
+	float:right;
+    margin: 5px 20px 20px 0px;
+}
+
+
+/* boxes */
+#boxes{
+	margin-top:20px;
+}
+
+#boxes .box{
+	float:left;
+	text-align: center;
+	width:30%;
+	padding:10px;
+	font:20px/1.5 Lato, sans-serif;
+	color:#3b474c;
+}
+#boxes .box i{
+	font-size:120px;
+	color:#3b474c;
+	margin-bottom:20px;
+}
+#boxes .box a{
+	text-decoration:underline;
+	text-decoration-color:#868c8e;
+	color:#3b474c;
+}
+
+/* Main */
+
+#main .container nav{
+	min-height:80px;
+}
+
+#main .container ul li{
+	color: #6d6d6d;
+	display:inline;
+	float: left;
+	font:14px/1.5 Lato, sans-serif;
+	margin-top:30px;
+	padding-left:35px;	
+}
+
+#main #mainBookCovers .book{
+	float:left;
+	margin-left:20px;
+	margin-bottom:60px;
+	font-weight:bold;
+	font-style:italic;
+	border: 1px solid #ccc;
+	padding:5px;
+	width:160px;
+	height:200px;
+}
+
+#main #mainBookCovers .book img{
+	width:160px;
+	height:160px;
+}
+#main #mainBookCovers .book h1{
+	font:14px/1.5 Lato, sans-serif;
+	width:160px;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow:hidden;
+}
+#main #mainBookCovers .book p{
+	font:10px/1.5 Lato, sans-serif;
+	color: #7a7979
+}
+
+@media(max-width: 960px){
+	header #search{
+		float:none;
+		text-align:center;
+		width:90%;
+		overflow:hidden;
+	}
+}
+
+
+@media(max-width: 768px){
+	#boxes .box,
+	header h1,
+	header nav ul li,
+	header nav ul,
+	header #search{
+		float:none;
+		margin-right:auto;
+		margin-left:auto;
+		margin-bottom:25px;
+		text-align:center;
+		width:90%;
+		overflow:hidden;
+	}
+	#main .container nav{
+		margin-bottom:50px;
+	}
+	
+}
+@media(max-width: 375px){
+	#main #mainBookCovers .book{
+		margin-left:5px;
+	}
+	#water #loginBox{
+		margin-left:auto;
+		margin-right:auto;
+	}
+	
+}
