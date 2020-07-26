@@ -14,7 +14,7 @@
 <!-- Included before airsonic stylesheet to allow overriding -->
 <link type="text/css" rel="stylesheet" href="<c:url value='/script/mediaelement/mediaelementplayer.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/${styleSheet}'/>" type="text/css">
-<title>Airsonic</title>
+<title>Booksonic</title>
 
 <script id="preferencesConfig" type="application/x-configuration">
   {
