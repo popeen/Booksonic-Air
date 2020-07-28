@@ -54,6 +54,12 @@
     </div>
 </c:if>
 
+<c:if test="${model.newVersionAvailable}">
+    <div style="width:15em;float:right;padding:0 1em 0 1em;border-left:5px solid red">
+        <fmt:message key="top.upgrade"><fmt:param value="${model.brand}"/><fmt:param value="${model.latestVersion}"/></fmt:message>
+    </div>
+</c:if>
+
 <c:forEach items="${model.albums}" var="album" varStatus="loopStatus">
 
     <c:set var="albumTitle">
