@@ -63,98 +63,44 @@
     </script>
 </head>
 
-<body class="topframe" style="margin:0.4em 1em 0 1em;">
+<body class="topframe">
 
-<span id="dummy-animation-target" style="max-width:0;display: none"></span>
+	<span id="dummy-animation-target" style="max-width:0;display: none"></span>
 
-<fmt:message key="top.home" var="home"/>
-<fmt:message key="top.now_playing" var="nowPlaying"/>
-<fmt:message key="top.starred" var="starred"/>
-<fmt:message key="left.playlists" var="playlists"/>
-<fmt:message key="top.settings" var="settings"/>
-<fmt:message key="top.status" var="status" />
-<fmt:message key="top.podcast" var="podcast"/>
-<fmt:message key="top.more" var="more"/>
-<fmt:message key="top.help" var="help"/>
-<fmt:message key="top.search" var="search"/>
+	<fmt:message key="top.home" var="home"/>
+	<fmt:message key="top.now_playing" var="nowPlaying"/>
+	<fmt:message key="top.starred" var="starred"/>
+	<fmt:message key="left.playlists" var="playlists"/>
+	<fmt:message key="top.settings" var="settings"/>
+	<fmt:message key="top.status" var="status" />
+	<fmt:message key="top.podcast" var="podcast"/>
+	<fmt:message key="top.more" var="more"/>
+	<fmt:message key="top.help" var="help"/>
+	<fmt:message key="top.search" var="search"/>
 
-<table style="margin:0;padding-top:10px">
-    <tr>
-		<h1 class="logo">Booksonic</h1>
-        <!--<td style="padding-right:4.5em;">
-            <img id="show-left-frame" src="<spring:theme code='sidebarImage'/>" onclick="showLeftFrame()" alt="" style="display:${model.showSideBar ? 'none' : 'inline'};cursor:pointer">
-            <img id="hide-left-frame" src="<spring:theme code='sidebarImage'/>" onclick="hideLeftFrame()" alt="" style="display:${model.showSideBar ? 'inline' : 'none'};cursor:pointer">
-        </td>-->
-        <td style="min-width:3em;padding-right:1em;text-align: center">
-            <div class="topHeader"><a href="home.view?" target="main">${home}</a></div>
-        </td>
-        <td style="min-width:3em;padding-right:1em;text-align: center">
-            <div class="topHeader"><a href="nowPlaying.view?" target="main">${nowPlaying}</a></div>
-        </td>
-        <td style="min-width:3em;padding-right:1em;text-align: center">
-            <div class="topHeader"><a href="starred.view?" target="main">${starred}</a></div>
-        </td>
-        <td style="min-width:3em;padding-right:1em;text-align: center">
-            <div class="topHeader"><a href="playlists.view?" target="main">${playlists}</a></div>
-        </td>
-        <td style="min-width:4em;padding-right:1em;text-align: center">
-            <div class="topHeader"><a href="podcastChannels.view?" target="main">${podcast}</a></div>
-        </td>
-        <c:if test="${model.user.settingsRole}">
-            <td style="min-width:3em;padding-right:1em;text-align: center">
-                <div class="topHeader"><a href="settings.view?" target="main">${settings}</a></div>
-            </td>
-        </c:if>
-        <td style="min-width:3em;padding-right:1em;text-align: center">
-            <div class="topHeader"><a href="status.view?" target="main">${status}</a></div>
-        </td>
-        <td style="min-width:3em;padding-right:1em;text-align: center">
-            <div class="topHeader"><a href="more.view?" target="main">${more}</a></div>
-        </td>
-        <td style="min-width:3em;padding-right:1em;text-align: center">
-            <div class="topHeader"><a href="help.view?" target="main">${help}</a></div>
-        </td>
-
-        <td style="padding-left:1em">
-            <form method="post" action="search.view" target="main" name="searchForm">
-                <td><input required type="text" name="query" id="query" size="28" placeholder="${search}" onclick="select();"
-                           onkeyup="triggerInstantSearch();"></td>
-                <td><a href="javascript:document.searchForm.submit()"><img src="<spring:theme code='searchImage'/>" alt="${search}" title="${search}"></a></td>
-            </form>
-        </td>
-
-        <td style="padding-left:15pt;padding-right:5pt;vertical-align: middle;width: 100%;text-align: center">
-            <c:if test="${model.user.settingsRole}"><a href="personalSettings.view" target="main"></c:if>
-            <c:choose>
-                <c:when test="${model.showAvatar}">
-                    <sub:url value="avatar.view" var="avatarUrl">
-                        <sub:param name="username" value="${model.user.username}"/>
-                    </sub:url>
-                    <div style="padding-bottom: 4px">
-                        <img src="${avatarUrl}" alt="User" width="30" height="30">
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <img src="<spring:theme code='userImage'/>" alt="User" height="24">
-                </c:otherwise>
-            </c:choose>
-
-            <div class="detail" style="color: #fff">
-                <c:out value="${model.user.username}" escapeXml="true"/>
-            </div>
-            <c:if test="${model.user.settingsRole}"></a></c:if>
-        </td>
-
-        <td style="padding-left:15pt;padding-right:5pt;vertical-align: right;width: 100%;text-align: center">
-            <a href="<c:url value='/logout'/>" target="_top">
-                <img src="<spring:theme code='logoutImage'/>" alt="logout" height="24">
-                <div class="detail" style="color: #fff">
-                    <fmt:message key="top.logout" var="logout"></fmt:message>
-                    <c:out value="${logout}"/>
-                </div>
-            </a>
-        </td>
-
-    </tr></table>
-
+	<h1 class="logo">Booksonic</h1>
+	<nav>
+		<ul>
+			<li class="navli"><a href="home.view?" target="main">${home}</a></li>
+			<li class="navli"><a href="#" onclick="toggleLeftFrameVisible()">Authors</a></li>
+			<li class="navli"><a href="nowPlaying.view?" target="main">${nowPlaying}</a></li>
+			<li class="navli"><a href="starred.view?" target="main">${starred}</a></li>
+			<li class="navli"><a href="playlists.view?" target="main">${playlists}</a></li>
+			<li class="navli"><a href="podcastChannels.view?" target="main">${podcast}</a></li>
+			<c:if test="${model.user.settingsRole}">
+				<li class="navli"><a href="settings.view?" target="main">${settings}</a></li>
+			</c:if>
+			<li class="navli"><a href="status.view?" target="main">${status}</a></li>
+			<li class="navli"><a href="more.view?" target="main">${more}</a></li>
+			<li class="navli"><a href="help.view?" target="main">${help}</a></li>
+		</ul>
+	</nav>
+				
+	<div style="float: right; margin-top: 10px;">
+		<form method="post" action="search.view" target="main" name="searchForm">
+			<input required="" type="text" name="query" id="query" size="28" placeholder="Search" onclick="select();" onkeyup="triggerInstantSearch();">
+			<a href="javascript:document.searchForm.submit()"><img src="icons/default_dark/search.png" alt="Search" title="Search"></a>
+		</form>
+    </div>
+	
 </body></html>

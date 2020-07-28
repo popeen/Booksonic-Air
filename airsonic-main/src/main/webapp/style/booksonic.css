@@ -14,7 +14,7 @@
 .logo {
     margin: -5px 10% 0px 0px;
     color: #fff;
-    padding: 15px 0px 15px 45px;
+    padding: 10px 0px 15px 45px;
     font: 30px/1.5 Lato, sans-serif;
     font-weight: bold;
     font-style: italic;
@@ -24,4 +24,14 @@
 .coverart{
 	border-radius: 0px !important;
 	border: 1px solid #aaa;
+}
+.navli{
+    display: inline;
+    float: left;
+    padding-right: 35px;
+    margin-top: 15px;
+}
+.navli a{
+	color: #fff;
+    font: 14px/1.5 Lato, sans-serif;
 }
