@@ -58,6 +58,8 @@ public class HomeController {
     private MediaFileService mediaFileService;
     @Autowired
     private SearchService searchService;
+    @Autowired
+    private VersionService versionService;
 
     @GetMapping
     protected ModelAndView handleRequestInternal(HttpServletRequest request) throws Exception {
@@ -133,6 +135,14 @@ public class HomeController {
         map.put("listOffset", listOffset);
         map.put("musicFolder", selectedMusicFolder);
 
+        if (userSettings.isFinalVersionNotificationEnabled() && versionService.isNewFinalVersionAvailable()) {
+            map.put("newVersionAvailable", true);
+            map.put("latestVersion", versionService.getLatestFinalVersion());
+
+        } else if (userSettings.isBetaVersionNotificationEnabled() && versionService.isNewBetaVersionAvailable()) {
+            map.put("newVersionAvailable", true);
+            map.put("latestVersion", versionService.getLatestBetaVersion());
+        }
         return new ModelAndView("home","model",map);
     }
 

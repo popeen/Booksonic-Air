@@ -218,7 +218,7 @@ public class VersionService {
 
     private final static String JSON_PATH = "$..tag_name";
     private final Pattern VERSION_REGEX = Pattern.compile("^v(.*)");
-    private static final String VERSION_URL = "https://api.github.com/repos/airsonic/airsonic/releases";
+    private static final String VERSION_URL = "https://api.github.com/repos/popeen/Booksonic-Air/releases";
 
     /**
      * Resolves the latest available Airsonic version by inspecting github.
