@@ -144,14 +144,13 @@ public class SettingsService {
     private static final int DEFAULT_COVER_ART_CONCURRENCY = 4;
     private static final String DEFAULT_WELCOME_TITLE = "Welcome to Booksonic!";
     private static final String DEFAULT_WELCOME_SUBTITLE = null;
-    private static final String DEFAULT_WELCOME_MESSAGE = "__Welcome to Booksonic!__\n" +
-            "\\\\ \\\\\n" +
-            "Booksonic is a free, web-based media streamer based on <a href='https://airsonic.github.io/' target='_blank'>Airsonic</a>, providing ubiquitous access to your audiobooks. \n" +
-            "\\\\ \\\\\n" +
-            "You can stream to multiple " +
-            "players simultaneously, for instance to one player in your kitchen and another in your living room.\n" +
-            "\\\\ \\\\\n" +
-            "To change or remove this message, log in with administrator rights and go to {link:Settings > General|generalSettings.view}.";
+    private static final String DEFAULT_WELCOME_MESSAGE = "<b>Welcome to Booksonic!</b>\n" +
+            "<br/>&nbsp;<br/>\n" +
+            "Booksonic is a free, web-based media streamer based on <a href='https://airsonic.github.io/' target='_blank'>Airsonic</a>, providing ubiquitous access to your audiobooks.\n" +
+            "<br/>&nbsp;<br/>\n" +
+            "You can stream to multiple players simultaneously, for instance to one player in your kitchen and another in your living room.\n" +
+            "<br/>&nbsp;<br/>\n" +
+            "To change or remove this message, log in with administrator rights and go to <a href='generalSettings.view'>Settings -> General</a>.";
     private static final String DEFAULT_LOGIN_MESSAGE = null;
     private static final String DEFAULT_LOCALE_LANGUAGE = "en";
     private static final String DEFAULT_LOCALE_COUNTRY = "";
