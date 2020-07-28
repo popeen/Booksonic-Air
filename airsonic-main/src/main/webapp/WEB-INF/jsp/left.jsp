@@ -8,11 +8,8 @@
     <script type="text/javascript" src="<c:url value='/dwr/interface/playlistService.js'/>"></script>
     <script type="text/javascript" language="javascript">
 
-        var playlists;
-
         function init() {
             dwr.engine.setErrorHandler(null);
-            updatePlaylists();
 
             var mainLocation = top.main.location.href;
             if (${model.musicFolderChanged}) {
@@ -26,48 +23,11 @@
                 evt.preventDefault();
             });
         }
-
-        function updatePlaylists() {
-            playlistService.getReadablePlaylists(playlistCallback);
-        }
-
-        function createEmptyPlaylist() {
-            showAllPlaylists();
-            playlistService.createEmptyPlaylist(playlistCallback);
-        }
-
-        function showAllPlaylists() {
-            $('#playlistOverflow').show('blind');
-            $('#showAllPlaylists').hide('blind');
-        }
-
-        function playlistCallback(playlists) {
-            this.playlists = playlists;
-
-            $("#playlists").empty();
-            $("#playlistOverflow").empty();
-            for (var i = 0; i < playlists.length; i++) {
-                var playlist = playlists[i];
-                var overflow = i > 9;
-                $("<p class='dense'><a target='main' href='playlist.view?id=" +
-                        playlist.id + "'>" + escapeHtml(playlist.name) + "&nbsp;(" + playlist.fileCount + ")</a></p>").appendTo(overflow ? "#playlistOverflow" : "#playlists");
-            }
-
-            if (playlists.length > 10 && !$('#playlistOverflow').is(":visible")) {
-                $('#showAllPlaylists').show();
-            }
-        }
     </script>
 </head>
 
 <body class="bgcolor2 leftframe" onload="init()">
 <a name="top"></a>
-
-<div style="padding-bottom:1.5em">
-    <a href="home.view" target="main">
-      <img src="<spring:theme code='logoImage'/>" style="width:196px" title="<fmt:message key='top.help'/>" alt="">
-    </a>
-</div>
 
 <c:if test="${fn:length(model.musicFolders) > 1}">
     <div style="padding-bottom:1.0em">
@@ -110,16 +70,6 @@
         </p>
     </c:forEach>
 </c:if>
-
-<h2 class="bgcolor1" style="padding-left: 2px"><fmt:message key="left.playlists"/></h2>
-<div id="playlistWrapper" style='padding-left:2px'>
-    <div id="playlists"></div>
-    <div id="playlistOverflow" style="display:none"></div>
-    <div style="padding-top: 0.3em"></div>
-    <div class="forward" id="showAllPlaylists" style="display: none"><a href="#" onclick="showAllPlaylists()"><fmt:message key="left.showallplaylists"/></a></div>
-    <div class="forward"><a href="#" onclick="createEmptyPlaylist()"><fmt:message key="left.createplaylist"/></a></div>
-    <div class="forward"><a href="importPlaylist.view" target="main"><fmt:message key="left.importplaylist"/></a></div>
-</div>
 
 <c:if test="${not empty model.radios}">
     <h2 class="bgcolor1" style="padding-left: 2px"><fmt:message key="left.radio"/></h2>
