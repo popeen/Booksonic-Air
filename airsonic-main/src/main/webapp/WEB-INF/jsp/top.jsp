@@ -98,7 +98,7 @@
 				
 	<div style="float: right; margin-top: 10px;">
 		<form method="post" action="search.view" target="main" name="searchForm">
-			<input required="" type="text" name="query" id="query" size="28" placeholder="Search" onclick="select();" onkeyup="triggerInstantSearch();">
+			<input required="" type="text" name="query" id="query" size="60" placeholder="Search" onclick="select();" onkeyup="triggerInstantSearch();">
 			<a href="javascript:document.searchForm.submit()"><img src="icons/default_dark/search.png" alt="Search" title="Search"></a>
 		</form>
     </div>
