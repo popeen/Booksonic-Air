@@ -711,26 +711,8 @@ public class SubsonicRESTController {
         directory.setName(dir.getName());
         directory.setStarred(jaxbWriter.convertDate(mediaFileDao.getMediaFileStarredDate(id, username)));
         directory.setPlayCount((long) dir.getPlayCount());
-
-        String desc = "noInfo";
-        String reader = "";
-        String lang = "";
-        String fullPath = "";
-        try {
-            fullPath = FilenameUtils.getFullPath(dir.getPath() + System.getProperty("file.separator"));
-        } catch (Exception e){ }
-        try {
-            desc = FileUtils.readFileToString(new File(fullPath + "desc.txt"), "UTF-8");
-        } catch (Exception e){ }
-        try {
-            reader = FileUtils.readFileToString(new File(fullPath + "reader.txt"));
-        } catch (Exception e){ }
-        try {
-            lang = FileUtils.readFileToString(new File(fullPath + "lang.txt"), "UTF-8");
-        } catch (Exception e){ }
-
-        directory.setDescription(desc);
-        directory.setReader(reader);
+        directory.setDescription(dir.getDescription());
+        directory.setReader(dir.getNarrator());
         directory.setLanguage(lang);
 
         if (dir.isAlbum()) {
