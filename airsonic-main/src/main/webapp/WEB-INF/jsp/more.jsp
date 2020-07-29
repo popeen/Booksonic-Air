@@ -50,6 +50,10 @@
                 return false;
             }
         }
+         
+		function correctPodcastUrl(){
+            document.getElementById("podcastUrl").innerHTML = (window.location).toString().replace('more', 'podcast').replace('.view?', '');
+        }
 
     </script>
 
@@ -60,7 +64,7 @@
     </style>
 
 </head>
-<body class="mainframe bgcolor1">
+<body class="mainframe bgcolor1" onload="correctPodcastUrl()">
 
 <h1>
     <img src="<spring:theme code='moreImage'/>" alt=""/>
