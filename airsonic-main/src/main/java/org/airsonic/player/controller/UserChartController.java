@@ -21,6 +21,7 @@ package org.airsonic.player.controller;
 
 import org.airsonic.player.domain.User;
 import org.airsonic.player.service.SecurityService;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
@@ -31,8 +32,10 @@ import org.jfree.chart.axis.LogarithmicAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,8 +104,8 @@ public class UserChartController extends AbstractChartController {
         JFreeChart chart = ChartFactory.createBarChart(null, null, null, dataset, PlotOrientation.HORIZONTAL, false, false, false);
 
         CategoryPlot plot = chart.getCategoryPlot();
-        Paint background = new GradientPaint(0, 0, Color.lightGray, 0, IMAGE_MIN_HEIGHT, Color.white);
-        plot.setBackgroundPaint(background);
+        ((BarRenderer) plot.getRenderer()).setBarPainter(new StandardBarPainter());
+        plot.setBackgroundPaint(new Color(0xBAD7E3));
         plot.setDomainGridlinePaint(Color.white);
         plot.setDomainGridlinesVisible(true);
         plot.setRangeGridlinePaint(Color.white);
@@ -116,13 +119,8 @@ public class UserChartController extends AbstractChartController {
         // Disable bar outlines.
         BarRenderer renderer = (BarRenderer) plot.getRenderer();
         renderer.setDrawBarOutline(false);
-
-        // Set up gradient paint for series.
-        GradientPaint gp0 = new GradientPaint(
-                0.0f, 0.0f, Color.blue,
-                0.0f, 0.0f, new Color(0, 0, 64)
-        );
-        renderer.setSeriesPaint(0, gp0);
+        renderer.setShadowVisible(false);
+        renderer.setSeriesPaint(0, new Color(0x3284A8));
 
         // Rotate labels.
         CategoryAxis domainAxis = plot.getDomainAxis();
