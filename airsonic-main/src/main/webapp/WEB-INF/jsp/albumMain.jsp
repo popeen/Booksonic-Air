@@ -245,33 +245,19 @@
 
     <c:if test="${not empty model.artist and not empty model.album}">
         <sub:url value="https://www.google.com/search" var="googleUrl" encoding="UTF-8">
-            <sub:param name="q" value='"${fn:escapeXml(model.artist)}" "${fn:escapeXml(model.album)}"'/>
+            <sub:param name="q" value='intitle:${fn:escapeXml(model.album)} inauthor:${fn:escapeXml(model.artist)}'/>
+            <sub:param name="tbm" value="bks"/>
         </sub:url>
-        <sub:url value="https://en.wikipedia.org/wiki/Special:Search" var="wikipediaUrl" encoding="UTF-8">
-            <sub:param name="search" value='"${fn:escapeXml(model.album)}"'/>
-            <sub:param name="go" value="Go"/>
+        <sub:url value="https://www.goodreads.com/search" var="goodReadsUrl" encoding="UTF-8">
+            <sub:param name="q" value='${fn:escapeXml(model.artist)} ${fn:escapeXml(model.album)}'/>
         </sub:url>
-        <sub:url value="https://www.allmusic.com/search/albums/%22${fn:escapeXml(model.artist)}%22+%22${fn:escapeXml(model.album)}%22" var="allmusicUrl">
+        <sub:url value="https://www.audible.com/search" var="audibleUrl" encoding="UTF-8">
+            <sub:param name="title" value='${fn:escapeXml(model.album)}'/>
+            <sub:param name="author_author" value='${fn:escapeXml(model.artist)}'/>
         </sub:url>
-        
-        <sub:url value="https://www.last.fm/search" var="lastFmUrl" encoding="UTF-8">
-            <sub:param name="q" value='"${fn:escapeXml(model.artist)}" "${fn:escapeXml(model.album)}"'/>
-            <sub:param name="type" value="album"/>
-        </sub:url>
-        <sub:url value="https://www.discogs.com/search/" var="discogsUrl" encoding="UTF-8">
-            <sub:param name="q" value='"${fn:escapeXml(model.artist)}" "${fn:escapeXml(model.album)}"'/>
-            <sub:param name="type" value="release"/>
-        </sub:url>
-        <span class="header"><fmt:message key="top.search"/> <a target="_blank" href="${googleUrl}">Google</a></span> |
-        <span class="header"><a target="_blank" rel="noopener noreferrer" href="${wikipediaUrl}">Wikipedia</a></span> |
-        <span class="header"><a target="_blank" rel="noopener noreferrer" href="${allmusicUrl}">allmusic</a></span> |
-        <span class="header"><a target="_blank" rel="noopener noreferrer" href="${lastFmUrl}">Last.fm</a></span> |
-        <span class="header"><a target="_blank" rel="noopener noreferrer" href="${discogsUrl}">Discogs</a></span> |
-        <c:if test="${not empty model.musicBrainzReleaseId}">
-          <sub:url value="https://musicbrainz.org/release/${model.musicBrainzReleaseId}" var="musicBrainzUrl" encoding="UTF-8">
-          </sub:url>
-          <span class="header"><a target="_blank" rel="noopener noreferrer" href="${musicBrainzUrl}">MusicBrainz</a></span> |
-        </c:if>
+        <span class="header"><fmt:message key="top.search"/> <a target="_blank" rel="noopener noreferrer" href="${audibleUrl}">Audible</a></span> |
+        <span class="header"><a target="_blank" rel="noopener noreferrer" href="${goodReadsUrl}">Goodreads</a></span> |
+		<span class="header"><a target="_blank" href="${googleUrl}">Google</a></span> |
         <span class="header">
             <fmt:message key="main.playcount"><fmt:param value="${model.dir.playCount}"/></fmt:message>
             <c:if test="${not empty model.dir.lastPlayed}">
