@@ -24,7 +24,6 @@ import com.google.common.collect.Lists;
 import org.airsonic.player.util.FileUtil;
 import org.airsonic.player.util.StringUtil;
 
-//import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
@@ -138,15 +137,6 @@ public class MediaFile {
         this.path = path;
     }
 
-/*    public String getDescription() {
-        String fullPath = FilenameUtils.getFullPath(this.getPath() + System.getProperty("file.separator"));
-        String description = "No description availiable";
-        try {
-            description = FileUtils.readFileToString(new File(fullPath + "desc.txt"), "UTF-8");
-        } catch (Exception e) { }
-        return description;
-    }
-*/
     private String readFile(String path, Charset encoding) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return new String(encoded, encoding);
@@ -154,7 +144,11 @@ public class MediaFile {
 
     public String getDescription() {
         try {
-            return readFile(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "desc.txt", StandardCharsets.UTF_8);
+            if (!isDirectory()) {
+                return readFile(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "desc.txt", StandardCharsets.UTF_8);
+            } else {
+                return readFile(path + File.separator + "desc.txt", StandardCharsets.UTF_8);
+            }
         } catch (Exception e) {
             return "No description availiable";
         }

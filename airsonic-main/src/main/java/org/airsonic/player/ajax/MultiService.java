@@ -29,7 +29,6 @@ import org.airsonic.player.service.MediaFileService;
 import org.airsonic.player.service.SecurityService;
 import org.airsonic.player.service.SettingsService;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import org.directwebremoting.WebContextFactory;
@@ -37,8 +36,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-
-import java.io.File;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,10 +70,7 @@ public class MultiService {
         List<SimilarArtist> similarArtists = getSimilarArtists(mediaFileId, maxSimilarArtists);
         List<TopSong> topSongs = getTopSongs(mediaFile, maxTopSongs);
         String fullPath = FilenameUtils.getFullPath(mediaFile.getPath() + System.getProperty("file.separator"));
-        String desc = "";
-        try {
-            desc = FileUtils.readFileToString(new File(fullPath + "desc.txt"), "UTF-8");
-        } catch (Exception e) { }
+        String desc = mediaFile.getDescription();
         ArtistBio artistBio = new ArtistBio(desc, "", "", "", "", ("coverArt.view?size=300&id=" + mediaFileId));
         return new ArtistInfo(similarArtists, artistBio, topSongs);
     }
