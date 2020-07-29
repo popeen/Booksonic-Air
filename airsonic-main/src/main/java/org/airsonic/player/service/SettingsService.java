@@ -180,7 +180,7 @@ public class SettingsService {
     private static final boolean DEFAULT_ORGANIZE_BY_FOLDER_STRUCTURE = true;
     private static final boolean DEFAULT_SORT_ALBUMS_BY_YEAR = true;
     private static final boolean DEFAULT_DLNA_ENABLED = false;
-    private static final String DEFAULT_DLNA_SERVER_NAME = "Airsonic";
+    private static final String DEFAULT_DLNA_SERVER_NAME = "Booksonic";
     private static final String DEFAULT_DLNA_BASE_LAN_URL = null;
     private static final boolean DEFAULT_SONOS_ENABLED = false;
     private static final String DEFAULT_SONOS_SERVICE_NAME = "Airsonic";
@@ -197,8 +197,8 @@ public class SettingsService {
     private static final String DEFAULT_SMTP_FROM = "support@booksonic.org";
 
     private static final boolean DEFAULT_CAPTCHA_ENABLED = false;
-    private static final String DEFAULT_RECAPTCHA_SITE_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
-    private static final String DEFAULT_RECAPTCHA_SECRET_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
+    private static final String DEFAULT_RECAPTCHA_SITE_KEY = "";
+    private static final String DEFAULT_RECAPTCHA_SECRET_KEY = "";
 
     private static final DataSourceConfigType DEFAULT_DATABASE_CONFIG_TYPE = DataSourceConfigType.LEGACY;
     private static final String DEFAULT_DATABASE_CONFIG_EMBED_DRIVER = null;
