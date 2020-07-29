@@ -294,9 +294,7 @@
 <table id="artistInfoTable" style="padding:2em;clear:both;display:none" class="bgcolor2 dropshadow">
     <tr>
         <td rowspan="5" style="vertical-align: top">
-            <a id="artistImageZoom" rel="zoom" href="void">
-                <img id="artistImage" class="dropshadow" alt="" style="margin-right:2em; display:none; max-width:300px; max-height:300px">
-            </a>
+            <img id="artistImage" class="dropshadow" alt="" style="margin-right:2em; display:none; max-width:300px; max-height:300px">
         </td>
         <td style="text-align:center"><h2>${fn:escapeXml(model.dir.name)}</h2></td>
     </tr>
