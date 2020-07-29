@@ -577,7 +577,7 @@
     </dependencies>
 
     <build>
-        <finalName>airsonic</finalName>
+        <finalName>booksonic</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
