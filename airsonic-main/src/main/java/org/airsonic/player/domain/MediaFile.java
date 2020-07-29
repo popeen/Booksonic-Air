@@ -23,9 +23,18 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.airsonic.player.util.FileUtil;
 import org.airsonic.player.util.StringUtil;
+
+//import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
+import java.io.IOException;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import java.util.Date;
 import java.util.List;
 
@@ -129,6 +138,28 @@ public class MediaFile {
         this.path = path;
     }
 
+/*    public String getDescription() {
+        String fullPath = FilenameUtils.getFullPath(this.getPath() + System.getProperty("file.separator"));
+        String description = "No description availiable";
+        try {
+            description = FileUtils.readFileToString(new File(fullPath + "desc.txt"), "UTF-8");
+        } catch (Exception e) { }
+        return description;
+    }
+*/
+    private String readFile(String path, Charset encoding) throws IOException {
+        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        return new String(encoded, encoding);
+    }
+
+    public String getDescription() {
+        try {
+            return readFile(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "desc.txt", StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            return "No description availiable";
+        }
+    }
+
     public String getFolder() {
         return folder;
     }
@@ -152,6 +183,23 @@ public class MediaFile {
 
     public void setMediaType(MediaType mediaType) {
         this.mediaType = mediaType;
+    }
+
+    public String getNarrator() {
+        String fullPath = FilenameUtils.getFullPath(this.getPath() + System.getProperty("file.separator"));
+        String narrator = "Unknown";
+        try {
+            File readerFile = new File(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "reader.txt");
+            File narratorFile = new File(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "narrator.txt");
+
+            if (narratorFile.exists()) {
+                return readFile(narratorFile.getAbsolutePath(), StandardCharsets.UTF_8);
+            } else if (readerFile.exists()) {
+                return readFile(readerFile.getAbsolutePath(), StandardCharsets.UTF_8);
+            }
+
+        } catch (Exception e) { }
+        return narrator;
     }
 
     public boolean isVideo() {

@@ -289,6 +289,10 @@
     }
 </script>
 
+<c:forEach items="${model.files}" var="song" varStatus="loopStatus" end="0">
+    <%--@elvariable id="song" type="net.sourceforge.subsonic.domain.MediaFile"--%>
+    <div style="border: 1px solid #aaa;background: #eee;padding: 5px;margin:  15px;margin-left: 0px;">${fn:escapeXml(song.description)}<br/><b>Narrated by:</b> ${fn:escapeXml(song.narrator)}</div>
+</c:forEach>
 
 <table cellpadding="0" style="width:100%;padding-top: 0.3em;padding-bottom: 1em">
     <tr style="vertical-align:top;">
