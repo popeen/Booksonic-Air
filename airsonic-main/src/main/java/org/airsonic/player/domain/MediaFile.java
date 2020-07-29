@@ -144,10 +144,10 @@ public class MediaFile {
 
     public String getDescription() {
         try {
-            if (!isDirectory()) {
-                return readFile(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "desc.txt", StandardCharsets.UTF_8);
-            } else {
+            if (isDirectory()) {
                 return readFile(path + File.separator + "desc.txt", StandardCharsets.UTF_8);
+            } else {
+                return readFile(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "desc.txt", StandardCharsets.UTF_8);
             }
         } catch (Exception e) {
             return "No description availiable";
@@ -169,6 +169,18 @@ public class MediaFile {
 
     public boolean exists() {
         return FileUtil.exists(getFile());
+    }
+
+    public String getLanguage() {
+        String fullPath = FilenameUtils.getFullPath(this.getPath() + System.getProperty("file.separator"));
+        String language = "Unknown";
+        try {
+            File languageFile = new File(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "lang.txt");
+
+            return readFile(languageFile.getAbsolutePath(), StandardCharsets.UTF_8);
+
+        } catch (Exception e) { }
+        return language;
     }
 
     public MediaType getMediaType() {

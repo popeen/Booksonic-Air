@@ -713,7 +713,7 @@ public class SubsonicRESTController {
         directory.setPlayCount((long) dir.getPlayCount());
         directory.setDescription(dir.getDescription());
         directory.setReader(dir.getNarrator());
-        directory.setLanguage(lang);
+        directory.setLanguage(dir.getLanguage());
 
         if (dir.isAlbum()) {
             directory.setAverageRating(ratingService.getAverageRating(dir));
