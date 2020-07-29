@@ -124,20 +124,6 @@
         <tr><td colspan="2">&nbsp;</td></tr>
 
         <tr>
-            <td><fmt:message key="generalsettings.welcometitle"/></td>
-            <td>
-                <form:input path="welcomeTitle" size="70"/>
-                <c:import url="helpToolTip.jsp"><c:param name="topic" value="welcomemessage"/></c:import>
-            </td>
-        </tr>
-        <tr>
-            <td><fmt:message key="generalsettings.welcomesubtitle"/></td>
-            <td>
-                <form:input path="welcomeSubtitle" size="70"/>
-                <c:import url="helpToolTip.jsp"><c:param name="topic" value="welcomemessage"/></c:import>
-            </td>
-        </tr>
-        <tr>
             <td style="vertical-align:top;"><fmt:message key="generalsettings.welcomemessage"/></td>
             <td>
                 <form:textarea path="welcomeMessage" rows="5" cols="70"/>
