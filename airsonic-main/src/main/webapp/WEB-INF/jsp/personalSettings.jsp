@@ -158,24 +158,6 @@
         </tr>
     </table>
 
-    <table id="lastFmTable" style="padding-left:2em">
-        <tr>
-            <td><fmt:message key="personalsettings.lastfmusername"/></td>
-            <td><form:input path="lastFmUsername" size="24"/></td>
-        </tr>
-        <tr>
-            <td><fmt:message key="personalsettings.lastfmpassword"/></td>
-            <td><form:password path="lastFmPassword" size="24"/></td>
-        </tr>
-    </table>
-
-    <table id="listenBrainzTable" style="padding-left:2em">
-        <tr>
-            <td><fmt:message key="personalsettings.listenbrainztoken"/></td>
-            <td><form:input path="listenBrainzToken" size="36"/></td>
-        </tr>
-    </table>
-
     <p style="padding-top:1em;padding-bottom:1em">
         <input type="submit" value="<fmt:message key='common.save'/>" style="margin-right:0.3em"/>
         <a href='nowPlaying.view'><input type="button" value="<fmt:message key='common.cancel'/>"></a>
