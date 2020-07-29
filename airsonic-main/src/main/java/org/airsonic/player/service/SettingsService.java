@@ -54,8 +54,8 @@ import java.util.regex.Pattern;
 public class SettingsService {
 
     // Airsonic home directory.
-    private static final File AIRSONIC_HOME_WINDOWS = new File("c:/airsonic");
-    private static final File AIRSONIC_HOME_OTHER = new File("/var/airsonic");
+    private static final File AIRSONIC_HOME_WINDOWS = new File("c:/booksonic");
+    private static final File AIRSONIC_HOME_OTHER = new File("/var/booksonic");
 
     // Global settings.
     private static final String KEY_INDEX_STRING = "IndexString";
