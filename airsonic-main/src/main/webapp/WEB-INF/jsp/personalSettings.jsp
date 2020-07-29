@@ -5,16 +5,9 @@
     <%@ include file="head.jsp" %>
     <%@ include file="jquery.jsp" %>
     <script type="text/javascript" src="<c:url value='/script/utils.js'/>"></script>
-
-    <script type="text/javascript" language="javascript">
-        function enableFields() {
-            $("#lastFm").is(":checked") ? $("#lastFmTable").show() : $("#lastFmTable").hide();
-            $("#listenBrainz").is(":checked") ? $("#listenBrainzTable").show() : $("#listenBrainzTable").hide();
-        }
-    </script>
 </head>
 
-<body class="mainframe bgcolor1" onload="enableFields()">
+<body class="mainframe bgcolor1">
 
 <c:import url="settingsHeader.jsp">
     <c:param name="cat" value="personal"/>
@@ -129,28 +122,10 @@
 
     <table class="indent">
         <tr>
-            <td><form:checkbox path="showNowPlayingEnabled" id="nowPlaying" cssClass="checkbox"/></td>
-            <td><label for="nowPlaying"><fmt:message key="personalsettings.shownowplaying"/></label></td>
-            <td style="padding-left:2em"><form:checkbox path="showArtistInfoEnabled" id="artistInfo" cssClass="checkbox"/></td>
-            <td><label for="artistInfo"><fmt:message key="personalsettings.showartistinfo"/></label></td>
-        </tr>
-        <tr>
-            <td><form:checkbox path="nowPlayingAllowed" id="nowPlayingAllowed" cssClass="checkbox"/></td>
-            <td><label for="nowPlayingAllowed"><fmt:message key="personalsettings.nowplayingallowed"/></label></td>
-            <td style="padding-left:2em"><form:checkbox path="autoHidePlayQueue" id="autoHidePlayQueue" cssClass="checkbox"/></td>
-            <td><label for="autoHidePlayQueue"><fmt:message key="personalsettings.autohideplayqueue"/></label></td>
-            <td style="padding-left:2em"><form:checkbox path="partyModeEnabled" id="partyModeEnabled" cssClass="checkbox"/></td>
-            <td><label for="partyModeEnabled"><fmt:message key="personalsettings.partymode"/></label>
-                <c:import url="helpToolTip.jsp"><c:param name="topic" value="partymode"/></c:import>
-            </td>
-        </tr>
-        <tr>
             <td><form:checkbox path="queueFollowingSongs" id="queueFollowingSongs" cssClass="checkbox"/></td>
             <td><label for="queueFollowingSongs"><fmt:message key="personalsettings.queuefollowingsongs"/></label></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td style="padding-left:2em"><form:checkbox path="autoHidePlayQueue" id="autoHidePlayQueue" cssClass="checkbox"/></td>
+            <td><label for="autoHidePlayQueue"><fmt:message key="personalsettings.autohideplayqueue"/></label></td>
         </tr>
     </table>
 
@@ -166,17 +141,6 @@
         <tr>
             <td><form:checkbox path="songNotificationEnabled" id="song" cssClass="checkbox"/></td>
             <td><label for="song"><fmt:message key="personalsettings.songnotification"/></label></td>
-        </tr>
-    </table>
-
-    <table class="indent">
-        <tr>
-            <td><form:checkbox path="lastFmEnabled" id="lastFm" cssClass="checkbox" onclick="enableFields()"/></td>
-            <td><label for="lastFm"><fmt:message key="personalsettings.lastfmenabled"/></label></td>
-        </tr>
-        <tr>
-            <td><form:checkbox path="listenBrainzEnabled" id="listenBrainz" cssClass="checkbox" onclick="enableFields()"/></td>
-            <td><label for="listenBrainz"><fmt:message key="personalsettings.listenbrainzenabled"/></label></td>
         </tr>
     </table>
 
