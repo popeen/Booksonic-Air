@@ -35,8 +35,6 @@ import org.airsonic.player.service.*;
 import org.airsonic.player.service.search.IndexType;
 import org.airsonic.player.util.StringUtil;
 import org.airsonic.player.util.Util;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
@@ -57,7 +55,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import java.io.File;
 import java.util.*;
 
 import static org.airsonic.player.security.RESTRequestParameterProcessingFilter.decrypt;
