@@ -1,56 +1,71 @@
-<!--
-# README.md
-# airsonic/airsonic
--->
-Airsonic
-========
-[![Build Status](https://travis-ci.org/airsonic/airsonic.svg?branch=master)](https://travis-ci.org/airsonic/airsonic)
-[![Coverity scan](https://scan.coverity.com/projects/17971/badge.svg)](https://scan.coverity.com/projects/airsonic)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/airsonic/airsonic.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/airsonic/airsonic/context:javascript)
-[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/airsonic/airsonic.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/airsonic/airsonic/context:java)
-[![codecov.io coverage](https://codecov.io/gh/airsonic/airsonic/branch/master/graph/badge.svg)](https://codecov.io/gh/airsonic/airsonic)
 
-What is Airsonic?
+Booksonic Air
+========
+
+What is Booksonic?
 -----------------
 
-Airsonic is a free, web-based media streamer, providing ubiquitous access to your music. Use it to share your music with friends, or to listen to your own music while at work. You can stream to multiple players simultaneously, for instance to one player in your kitchen and another in your living room.
+Booksonic is a platform for accessing the audibooks you own wherever you are.
+At the moment the platform consists of
 
-Airsonic is designed to handle very large music collections (hundreds of gigabytes). Although optimized for MP3 streaming, it works for any audio or video format that can stream over HTTP, for instance AAC and OGG. By using transcoder plug-ins, Airsonic supports on-the-fly conversion and streaming of virtually any audio format, including WMA, FLAC, APE, Musepack, WavPack and Shorten.
+ - **Booksonic Air** - A server for streaming your audiobooks, successor to the original Booksonic server. Based on Airsonic.
+ - **Booksonic App** - An android app for connection to Booksonic servers. Based on DSub
+ 
+**Upcoming:**
+ - **Booksonic Bridge** - This is an upcoming serverside software that will allow you to use third party servers like Plex, Emby, Youtube etc. It is currently in closed beta and no timeframe is given.
 
-If you have constrained bandwidth, you may set an upper limit for the bitrate of the music streams. Airsonic will then automatically resample the music to a suitable bitrate.
+**Extra tools**
+ - **Booksonic ODM2Meta** - A script for quickly converting your ODM files to metadata that can be used by Booksonic. In the future this will not be needed as Booksonic will soon support ODM files natively.
+ - **Bulk convert UTF8** - A script for bulk conversion of meta files to UTF-8
+ - **[Booksonic Library Editor]([https://github.com/galacticat/booksonic-library-editor](https://github.com/galacticat/booksonic-library-editor))** - A third party Library editor
 
-In addition to being a streaming media server, Airsonic works very well as a local jukebox. The intuitive web interface, as well as search and index facilities, are optimized for efficient browsing through large media libraries. Airsonic also comes with an integrated Podcast receiver, with many of the same features as you find in iTunes.
+While there is no iOS app available (yet) Booksonic fully supports the Subsonic API so you will be able to use it with any app that supports that, you will miss out on some Booksonic specific features but  you will be able to listen without problem.
 
-Based on Java technology, Airsonic runs on most platforms, including Windows, Mac, Linux and Unix variants.
+More information about the project can be found at [booksonic.org](https://booksonic.org)
+
+What is Booksonic Air?
+-----------------
+First of all, credit where credit is due, Booksonic Air is not built from scratch, instead it is building on top of the amazing work done by the people over at [Airsonic](http://www.airsonic.org/) .
+
+Now then, Booksonic Air is the latest and greatest Booksonic server available, this is what you are using to host your audiobooks.
+
+It is designed to handle very large collections (hundreds of gigabytes). Although optimized for MP3 streaming, it works for any audio or video format that can stream over HTTP, for instance AAC and OGG. By using transcoder plug-ins, Airsonic supports on-the-fly conversion and streaming of virtually any audio format, including WMA, FLAC, APE, Musepack, WavPack and Shorten.
+
+If you have constrained bandwidth, you may set an upper limit for the bitrate of the streams. Booksonic will then automatically resample to a suitable bitrate.
+
+
+Based on Java technology, Booksonic runs on most platforms, including Windows, Mac, Linux and Unix variants.
 
 ![Screenshot](contrib/assets/screenshot.png)
 
 History
 -----
 
-The original [Subsonic](http://www.subsonic.org/) is developed by [Sindre Mehus](mailto:sindre@activeobjects.no). Subsonic was open source through version 6.0-beta1, and closed-source from then onwards.
+The original [Subsonic](http://www.subsonic.org/) is developed by Sindre Mehus Subsonic and was open-source through version 6.0-beta1, and closed-source from then onwards.
 
-Libresonic was created and maintained by [Eugene E. Kashpureff Jr](mailto:eugene@kashpureff.org). It originated as an unofficial("Kang") of Subsonic which did not contain the Licensing code checks present in the official builds. With the announcement of Subsonic's closed-source future, a decision was made to make a full fork and rebrand to Libresonic.
+At the end of 2015 Popeen forked Subsonic and built the first Booksonic server for his own personal use, this was about half a year before Subsonic went closed-source.
 
-Around July 2017, it was discovered that Eugene had different intentions/goals
+With the announcement of Subsonic's closed-source future the fork Libresonic grew out of what was previously a Subsonic build without license checks created by Eugene E. Kashpureff Jr.
+
+Around July 2017, it was discovered that the maintainer of Libresonic had different intentions/goals
 for the project than some contributors had.  Although the developers were
 hesitant to create a fork as it would fracture/confuse the community even
 further, it was deemed necessary in order to preserve a community-focused fork.
+This new fork is what we know today as [Airsonic](http://www.airsonic.org/)
 To reiterate this more clearly:
 
 Airsonic's goal is to provide a full-featured, stable, self-hosted media server
 based on the Subsonic codebase that is free, open source, and community driven.
 
-Pull Requests are always welcome. Keep in mind that we strive to balance
-stability with new features. As such, all Pull Requests are reviewed before
-being merged to ensure we continue to meet our goals.
+Moving on to summer of 2020 and Booksonic has grown to now having a couple of thousand users but the server is still built on top of the old Subsonic codebase as well as full of bugs and is over all not very polished, on top of that community members that want to do their own modifications find it hard to build the server from source. Popeen now decides to fork Airsonic and port the Booksonic functionality over, thus Booksonic Air was born.
+
 
 License
 -------
 
-Airsonic is free software and licensed under the [GNU General Public License version 3](http://www.gnu.org/copyleft/gpl.html). The code in this repository (and associated binaries) are free of any "license key" or other restrictions. If you wish to thank the maintainer of this repository, please consider a donation to the [Electronic Frontier Foundation](https://supporters.eff.org/donate).
+Booksonic Air is free software and licensed under the [GNU General Public License version 3](http://www.gnu.org/copyleft/gpl.html). The code in this repository (and associated binaries) are free of any "license key" or other restrictions. If you wish to thank the maintainer of this repository, please consider a donation to the [Electronic Frontier Foundation](https://supporters.eff.org/donate).
 
-The [Subsonic source code](https://github.com/airsonic/subsonic-svn) was released under the GPLv3 through version 6.0-beta1. Beginning with 6.0-beta2, source is no longer provided. Binaries of Subsonic are only available under a commercial license. There is a [Subsonic Premium](http://www.subsonic.org/pages/premium.jsp) service which adds functionality not available in Airsonic. Subsonic also offers RPM, Deb, Exe, and other pre-built packages that Airsonic [currently does not](https://github.com/airsonic/airsonic/issues/65).
+The [Subsonic source code](https://github.com/airsonic/subsonic-svn) was released under the GPLv3 through version 6.0-beta1. Beginning with 6.0-beta2, source is no longer provided. Binaries of Subsonic are only available under a commercial license. There is a [Subsonic Premium](http://www.subsonic.org/pages/premium.jsp) service which adds functionality not available in Booksonic.
 
 The cover zooming feature is provided by [jquery.fancyzoom](https://github.com/keegnotrub/jquery.fancyzoom),
 released under [MIT License](http://www.opensource.org/licenses/mit-license.php).
@@ -61,18 +76,14 @@ and are licensed under [MIT license](https://github.com/feathericons/feather/blo
 Usage
 -----
 
-Airsonic can be downloaded from
-[GitHub](https://github.com/airsonic/airsonic/releases).
+All Booksonic downloads can be found at
+https://booksonic.org/download
 
-Please use the [Airsonic documentation](https://airsonic.github.io/docs/) for instructions on running Airsonic.
-
+Pull requests
+---------
+All pull requests are welcome to any of the Booksonic projects
 
 Community
 ---------
-We have several places outside of github for community discussion, questions, etc:
+If you have any questions or ideas, come visit us at [/r/booksonic](https://reddit.com/r/booksonic) over on Reddit
 
-- [#airsonic:matrix.org on Matrix](https://matrix.to/#/#airsonic:matrix.org)
-- [#airsonic on IRC](http://webchat.freenode.net?channels=%23airsonic)
-- [airsonic subreddit](https://www.reddit.com/r/airsonic)
-
-*Note that the Matrix room and IRC channel are bridged together.*
