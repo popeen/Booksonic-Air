@@ -56,17 +56,17 @@ public final class Util {
     }
 
     public static String getDefaultMusicFolder() {
-        String def = isWindows() ? "c:\\music" : "/var/music";
+        String def = isWindows() ? "c:\\audiobooks" : "/var/audiobooks";
         return System.getProperty("airsonic.defaultMusicFolder", def);
     }
 
     public static String getDefaultPodcastFolder() {
-        String def = isWindows() ? "c:\\music\\Podcast" : "/var/music/Podcast";
+        String def = isWindows() ? "c:\\booksonic\\Podcast" : "/var/booksonic/Podcast";
         return System.getProperty("airsonic.defaultPodcastFolder", def);
     }
 
     public static String getDefaultPlaylistFolder() {
-        String def = isWindows() ? "c:\\playlists" : "/var/playlists";
+        String def = isWindows() ? "c:\\booksonic\\playlists" : "/var/booksonic/playlists";
         return System.getProperty("airsonic.defaultPlaylistFolder", def);
     }
 
