@@ -1123,6 +1123,7 @@ public class SettingsService {
         settings.setPaginationSize(40);
 
         UserSettings.Visibility playlist = settings.getPlaylistVisibility();
+        playlist.setTrackNumberVisible(true);
         playlist.setArtistVisible(true);
         playlist.setAlbumVisible(true);
         playlist.setYearVisible(true);
