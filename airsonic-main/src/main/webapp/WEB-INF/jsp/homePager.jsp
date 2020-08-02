@@ -79,14 +79,5 @@
                 <fmt:message key="common.refresh"/>
             </a>
         </td>
-
-        <c:if test="${not empty model.albums}">
-            <td>
-                <a href="javascript:playShuffle()">
-                  <img src="<spring:theme code='shuffleImage'/>" alt="Shuffle" style="height:16px;">
-                  <fmt:message key="home.shuffle"/>
-                </a>
-            </td>
-        </c:if>
     </tr>
 </table>
