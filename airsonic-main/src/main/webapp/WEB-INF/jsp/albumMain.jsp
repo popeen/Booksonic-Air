@@ -307,9 +307,6 @@
                             <c:param name="asTable" value="true"/>
                         </c:import>
 
-                        <td class="fit"><input type="checkbox" id="songIndex${loopStatus.count - 1}">
-                            <span id="songId${loopStatus.count - 1}" style="display: none">${song.id}</span></td>
-
                         <c:if test="${model.visibility.trackNumberVisible}">
                             <td class="fit rightalign">
                                 <span class="detail">${song.trackNumber}</span>
@@ -388,23 +385,6 @@
                     <c:param name="showChange" value="${model.user.coverArtRole}"/>
                 </c:import>
             </div>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <select id="moreActions" onchange="actionSelected(this.options[selectedIndex].id);" style="margin-bottom:1.0em">
-                <option id="top" selected="selected"><fmt:message key="main.more.selection"/></option>
-                <option id="selectAll">&nbsp;&nbsp;<fmt:message key="playlist.more.selectall"/></option>
-                <option id="selectNone">&nbsp;&nbsp;<fmt:message key="playlist.more.selectnone"/></option>
-                <c:if test="${model.user.downloadRole}">
-                    <option id="download">&nbsp;&nbsp;<fmt:message key="common.download"/></option>
-                </c:if>
-                <c:if test="${model.user.shareRole}">
-                    <option id="share">&nbsp;&nbsp;<fmt:message key="main.more.share"/></option>
-                </c:if>
-                <option id="appendPlaylist">&nbsp;&nbsp;<fmt:message key="playlist.append"/></option>
-            </select>
         </td>
     </tr>
 
