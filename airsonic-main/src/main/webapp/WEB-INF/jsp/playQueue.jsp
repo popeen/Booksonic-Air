@@ -1005,13 +1005,6 @@
                         </a>
                       </span> |</td>
 
-                    <td style="white-space:nowrap;">
-                      <span class="header">
-                        <a href="javascript:onShuffle()" id="shuffleQueue" class="player-control">
-                            <img src="<spring:theme code='shuffleImage'/>" alt="Shuffle" title="Shuffle" style="cursor:pointer; height:18px">
-                        </a>
-                      </span> |</td>
-
                     <c:if test="${model.player.web or model.player.jukebox or model.player.external}">
                         <td style="white-space:nowrap;">
                           <span class="header">
