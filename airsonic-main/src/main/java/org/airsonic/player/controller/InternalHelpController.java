@@ -355,7 +355,7 @@ public class InternalHelpController {
             File dbDirectory = new File(SettingsService.getAirsonicHome(), "db");
             map.put("dbDirectorySizeBytes", dbDirectory.exists() ? FileUtils.sizeOfDirectory(dbDirectory) : 0);
             map.put("dbDirectorySize", FileUtils.byteCountToDisplaySize((long) map.get("dbDirectorySizeBytes")));
-            File dbLogFile = new File(dbDirectory, "airsonic.log");
+            File dbLogFile = new File(dbDirectory, "booksonic.log");
             map.put("dbLogSizeBytes", dbLogFile.exists() ? dbLogFile.length() : 0);
             map.put("dbLogSize", FileUtils.byteCountToDisplaySize((long) map.get("dbLogSizeBytes")));
         } else {

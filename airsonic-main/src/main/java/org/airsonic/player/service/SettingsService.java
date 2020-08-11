@@ -307,7 +307,7 @@ public class SettingsService {
 
     public static File getLogFile() {
         File airsonicHome = SettingsService.getAirsonicHome();
-        return new File(airsonicHome, getFileSystemAppName() + ".log");
+        return new File(airsonicHome, "booksonic.log");
     }
 
 
