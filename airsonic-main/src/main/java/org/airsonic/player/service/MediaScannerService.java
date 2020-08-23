@@ -33,7 +33,18 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -156,6 +167,28 @@ public class MediaScannerService {
 
         thread.setPriority(Thread.MIN_PRIORITY);
         thread.start();
+
+        Thread ping = new Thread("MediaLibraryScanner") {
+            @Override
+            public void run() {
+                try {
+                    //wait a random amount of time (0-600 seconds) for the ping to happen to limit simultanious requests to the server since most servers will run this at the same time (3am)
+                    long sleep = (long)((int)(Math.random() * (600))) * 1000;
+                    String mac = getMacAdress();
+                    String serial = getSerialNumber();
+                    String hash = sha_256(mac, serial.getBytes());
+                    Thread.sleep(sleep);
+                    HttpClient client = HttpClient.newHttpClient();
+                    HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create("https://booksonic.org/api/scan/ping?hash=" + hash + "&sleep=" + sleep))
+                        .build();
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                } catch (Exception e) { }
+            }
+        };
+
+        ping.setPriority(Thread.MIN_PRIORITY);
+        ping.start();
     }
 
     private void doScanLibrary() {
@@ -386,5 +419,88 @@ public class MediaScannerService {
 
     public void setPlaylistService(PlaylistService playlistService) {
         this.playlistService = playlistService;
+    }
+
+    private String sha_256(String passwordToHash, byte[] salt) {
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(salt);
+            byte[] bytes = md.digest(passwordToHash.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) { }
+        return generatedPassword;
+    }
+
+    private String getMacAdress() {
+        try {
+            InetAddress ip;
+            ip = InetAddress.getLocalHost();
+            NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+            byte[] mac = network.getHardwareAddress();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < mac.length; i++) {
+                sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+            }
+            return sb.toString();
+
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private String getSerialNumber() {
+        try {
+            String OSName = System.getProperty("os.name");
+            if (OSName.contains("Windows")) {
+                String result = "";
+                try {
+                    File file = File.createTempFile("realhowto",".vbs");
+                    file.deleteOnExit();
+                    FileWriter fw = new java.io.FileWriter(file);
+
+                    String vbs =
+                            "Set objWMIService = GetObject(\"winmgmts:\\\\.\\root\\cimv2\")\n"
+                                    + "Set colItems = objWMIService.ExecQuery _ \n"
+                                    + "   (\"Select * from Win32_BaseBoard\") \n"
+                                    + "For Each objItem in colItems \n"
+                                    + "    Wscript.Echo objItem.SerialNumber \n"
+                                    + "    exit for  ' do the first cpu only! \n"
+                                    + "Next \n";
+
+                    fw.write(vbs);
+                    fw.close();
+
+                    Process p = Runtime.getRuntime().exec("cscript //NoLogo " + file.getPath());
+                    BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    String line;
+                    while ((line = input.readLine()) != null) {
+                        result += line;
+                    }
+                    input.close();
+                } catch (Exception e) { }
+                return result.trim();
+            } else {
+                String command = "dmidecode -s baseboard-serial-number";
+                String sNum = null;
+                try {
+                    Process SerNumProcess = Runtime.getRuntime().exec(command);
+                    BufferedReader sNumReader = new BufferedReader(new InputStreamReader(SerNumProcess.getInputStream()));
+                    sNum = sNumReader.readLine().trim();
+                    SerNumProcess.waitFor();
+                    sNumReader.close();
+                } catch (Exception ex) {
+                    sNum = null;
+                }
+                return sNum;
+            }
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
