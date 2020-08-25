@@ -1029,7 +1029,15 @@
                             </a>
                           </span> |</td>
                     </c:if>
-
+                    <td>
+                        <select onchange='parent.frames["playQueue"].document.getElementById("audioPlayer_html5").playbackRate = this.options[selectedIndex].value'>
+                            <option value="1.0">Playback Speed</option>
+                            <option value="1">1.0</option>
+                            <option value="1.2">1.2</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2.0</option>
+                        </select>
+                    </td>
                     <td style="white-space:nowrap;"><select id="moreActions" onchange="actionSelected(this.options[selectedIndex].id)">
                         <option id="top" selected="selected"><fmt:message key="playlist.more"/></option>
                         <optgroup label="<fmt:message key='playlist.more.playlist'/>">
