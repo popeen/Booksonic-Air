@@ -219,6 +219,19 @@
             showNotification(currentSong);
             </c:if>
         }
+        playbackSpeedUpdate();
+    }
+
+    function playbackSpeedUpdate(){
+        var display = document.getElementById("playbackSpeedDisplay");
+        var input = document.getElementById("playbackSpeedInput");
+        var player = $('#audioPlayer').get(0);
+        
+        if(player != null){
+            player.playbackRate = input.value;
+        }
+        
+        display.innerHTML = parseFloat(input.value).toFixed(1);
     }
 
     /**
@@ -1030,20 +1043,6 @@
                           </span> |</td>
                     </c:if>
                     <td>
-                        <script>
-                            function playbackSpeedUpdate(){
-                                var display = document.getElementById("playbackSpeedDisplay");
-                                var input = document.getElementById("playbackSpeedInput");
-                                var player = parent.frames["playQueue"].document.getElementById("audioPlayer_html5");
-                                
-                                if(player != null){
-                                    player.playbackRate = input.value;
-                                    display.innerHTML = parseFloat(input.value).toFixed(1);
-                                }else{
-                                    input.value = 1.0;
-                                }
-                            }
-                        </script>
                         <span id="playbackSpeedDisplay" class="mejs__time">1.0</span>
                         <input type="range" id="playbackSpeedInput" value="1.0" min="0.5" max="2.0" step="0.1" oninput="playbackSpeedUpdate()" onchange="playbackSpeedUpdate()" style="color:#333">
                     </td>
