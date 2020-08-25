@@ -1030,13 +1030,8 @@
                           </span> |</td>
                     </c:if>
                     <td>
-                        <select onchange='parent.frames["playQueue"].document.getElementById("audioPlayer_html5").playbackRate = this.options[selectedIndex].value'>
-                            <option value="1.0">Playback Speed</option>
-                            <option value="1">1.0</option>
-                            <option value="1.2">1.2</option>
-                            <option value="1.5">1.5</option>
-                            <option value="2">2.0</option>
-                        </select>
+                        <span id="playbackSpeed">1</span>
+                        <input type="range" value="1" min="0.5" max="2" step="0.1" oninput='parent.frames["playQueue"].document.getElementById("audioPlayer_html5").playbackRate = this.value; document.getElementById("playbackSpeed").innerHTML = this.value'  onchange='parent.frames["playQueue"].document.getElementById("audioPlayer_html5").playbackRate = this.value; document.getElementById("playbackSpeed").innerHTML = this.value' style="color:#333">
                     </td>
                     <td style="white-space:nowrap;"><select id="moreActions" onchange="actionSelected(this.options[selectedIndex].id)">
                         <option id="top" selected="selected"><fmt:message key="playlist.more"/></option>
