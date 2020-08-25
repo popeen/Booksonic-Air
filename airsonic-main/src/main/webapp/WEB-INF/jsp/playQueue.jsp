@@ -1030,8 +1030,22 @@
                           </span> |</td>
                     </c:if>
                     <td>
-                        <span id="playbackSpeed">1</span>
-                        <input type="range" value="1" min="0.5" max="2" step="0.1" oninput='parent.frames["playQueue"].document.getElementById("audioPlayer_html5").playbackRate = this.value; document.getElementById("playbackSpeed").innerHTML = this.value'  onchange='parent.frames["playQueue"].document.getElementById("audioPlayer_html5").playbackRate = this.value; document.getElementById("playbackSpeed").innerHTML = this.value' style="color:#333">
+                        <script>
+                            function playbackSpeedUpdate(){
+                                var display = document.getElementById("playbackSpeedDisplay");
+                                var input = document.getElementById("playbackSpeedInput");
+                                var player = parent.frames["playQueue"].document.getElementById("audioPlayer_html5");
+                                
+                                if(player != null){
+                                    player.playbackRate = input.value;
+                                    display.innerHTML = parseFloat(input.value).toFixed(1);
+                                }else{
+                                    input.value = 1.0;
+                                }
+                            }
+                        </script>
+                        <span id="playbackSpeedDisplay" class="mejs__time">1.0</span>
+                        <input type="range" id="playbackSpeedInput" value="1.0" min="0.5" max="2.0" step="0.1" oninput="playbackSpeedUpdate()" onchange="playbackSpeedUpdate()" style="color:#333">
                     </td>
                     <td style="white-space:nowrap;"><select id="moreActions" onchange="actionSelected(this.options[selectedIndex].id)">
                         <option id="top" selected="selected"><fmt:message key="playlist.more"/></option>
