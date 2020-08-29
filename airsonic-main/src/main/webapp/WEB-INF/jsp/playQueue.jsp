@@ -28,12 +28,10 @@
 </head>
 
 <body class="bgcolor2 playlistframe" onload="init()">
-
-    <div id="player" style="visibility:hidden;">
-        <audio id="audioPlayer" data-mejsoptions='{"alwaysShowControls": false, "enableKeyboard": false}' tabindex="-1" />
-    </div>
     
-    <div style="width: 100%">
+    
+    
+    <div style="width: 100%; margin-top: 20px;">
         <img src="" id="coverart" style="margin: auto; display:block"/>
     </div>
     
@@ -44,9 +42,11 @@
     </div>
         
        
-    <div id="playbackSpeed" style="display:none">
-        <span id="playbackSpeedDisplay" class="mejs__time">1.0</span>
-        <input type="range" id="playbackSpeedInput" value="1.0" min="0.5" max="2.0" step="0.1" oninput="playbackSpeedUpdate()" onchange="playbackSpeedUpdate()">
+    <div id="playbackSpeed" style="display:none; width: 100%">
+        <div style="margin: auto; width: 220px; display:block">
+            <span id="playbackSpeedDisplay" class="mejs__time">1.0</span>
+            <input type="range" id="playbackSpeedInput" value="1.0" min="0.5" max="2.0" step="0.1" oninput="playbackSpeedUpdate()" onchange="playbackSpeedUpdate()">
+        </div>
     </div>
     
     
@@ -55,11 +55,11 @@
         <div style="margin: auto; width: 90px; margin-top: 20px; display:block">
             <i id="previousButton" class="fa fa-step-backward" onclick="onPrevious()" style="cursor:pointer"></i>
             
-            <span id="startButton" class="fa-stack fa-lg" onclick="onStart()" style="cursor: pointer; display: none;">
+            <span id="startButton" class="fa-stack fa-lg" onclick="onStart()" style="cursor: pointer;">
                 <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
                 <i class="fa fa-play-circle fa-stack-2x"></i>
             </span>
-            <span id="stopButton" class="fa-stack fa-lg" onclick="onStop()" style="cursor: pointer;">
+            <span id="stopButton" class="fa-stack fa-lg" onclick="onStop()" style="cursor: pointer; display: none;">
                 <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
                 <i class="fa fa-pause-circle fa-stack-2x"></i>
             </span>
@@ -67,30 +67,30 @@
             <i id="nextButton" class="fa fa-step-forward" onclick="onNext(false)" style="cursor:pointer"></i>
         </div>
         
-        <input type="range" id="playbackSpeedInput" style="width: 90%; display: block; margin: auto" value="30" min="0" max="100" step="1" oninput="playbackSpeedUpdate()" onchange="playbackSpeedUpdate()">
-        <div>1:01:31 / 15:01:31</div>
+        <div id="player">
+            <audio id="audioPlayer" data-mejsoptions='{"alwaysShowControls": false, "enableKeyboard": false, "features": ["current", "progress", "duration"]}' tabindex="-1" />
+        </div>
         
-        
-                        <table class="music indent" style="cursor:pointer">
+        <table class="music indent" style="cursor:pointer">
                         
-    <tbody id="playlistBody">
-        <tr id="pattern" style="display:none;margin:0;padding:0;border:0">
-            <td class="fit">
-                <img id="removeSong" onclick="onRemove(this.id.substring(10) - 1)" src="<spring:theme code='removeImage'/>"
-                     style="cursor:pointer; height:18px;" alt="<fmt:message key='playlist.remove'/>" title="<fmt:message key='playlist.remove'/>"></td>
+            <tbody id="playlistBody">
+                <tr id="pattern" style="display:none;margin:0;padding:0;border:0">
+                    <td class="fit">
+                        <img id="removeSong" onclick="onRemove(this.id.substring(10) - 1)" src="<spring:theme code='removeImage'/>"
+                             style="cursor:pointer; height:18px;" alt="<fmt:message key='playlist.remove'/>" title="<fmt:message key='playlist.remove'/>"></td>
 
 
-            <td class="truncate">
-                
-                        <img id="currentImage" src="<spring:theme code='currentImage'/>" alt="" style="display:none;padding-right: 0.5em"> <span class="detail" id="trackNumber">1</span>. <span class="songTitle"><a id="titleUrl" href="javascript:void(0)">Title</a></span>
-            </td>
+                    <td class="truncate">
+                        
+                                <img id="currentImage" src="<spring:theme code='currentImage'/>" alt="" style="display:none;padding-right: 0.5em"> <span class="detail" id="trackNumber">1</span>. <span class="songTitle"><a id="titleUrl" href="javascript:void(0)">Title</a></span>
+                    </td>
 
-            <c:if test="${model.visibility.durationVisible}">
-                <td class="fit rightalign"><span id="duration" class="detail">Duration</span></td>
-            </c:if>
-        </tr>
-    </tbody>
-</table>
+                    <c:if test="${model.visibility.durationVisible}">
+                        <td class="fit rightalign"><span id="duration" class="detail">Duration</span></td>
+                    </c:if>
+                </tr>
+            </tbody>
+        </table>
 
     </div>
     
@@ -322,6 +322,9 @@
 
         // Whenever playback starts, show a notification for the current playing song.
         $('#audioPlayer').on("playing", onPlaying);
+        
+        $('#audioPlayer').on("timeupdate", onTimeupdate);
+        
     }
 
     function getPlayQueue() {
@@ -369,6 +372,13 @@
         }
         $("#startButton").show();
         $("#stopButton").hide();
+    }
+
+    /**
+     * Timeupdate
+     */
+    function onTimeupdate() {
+        $("#playbackSpeedDisplay").innerHTML = $('#audioPlayer').get(0).currentTime;
     }
 
     /**

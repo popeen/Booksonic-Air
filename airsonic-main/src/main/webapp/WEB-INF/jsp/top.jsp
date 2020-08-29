@@ -82,6 +82,7 @@
 	<nav>
 		<ul>
 			<li class="navli"><a href="#" onclick="toggleLeftFrameVisible()">Player</a></li>
+            <li class="navli" style="color: #fff;> | </li>
 			<li class="navli"><a href="home.view?" target="main">${home}</a></li>
 			<li class="navli"><a href="left.view?" target="main">Authors</a></li>
 			<li class="navli"><a href="nowPlaying.view?" target="main">${nowPlaying}</a></li>
