@@ -30,7 +30,7 @@
         function showLeftFrame() {
             $("#show-left-frame").hide();
             $("#hide-left-frame").show();
-            toggleLeftFrame(230);
+            toggleLeftFrame(420);
             multiService.setShowSideBar(true);
             showSideBar = true;
         }
@@ -81,8 +81,9 @@
 	<h1 class="logo">Booksonic</h1>
 	<nav>
 		<ul>
+			<li class="navli"><a href="#" onclick="toggleLeftFrameVisible()">Player</a></li>
 			<li class="navli"><a href="home.view?" target="main">${home}</a></li>
-			<li class="navli"><a href="#" onclick="toggleLeftFrameVisible()">Authors</a></li>
+			<li class="navli"><a href="left.view?" target="main">Authors</a></li>
 			<li class="navli"><a href="nowPlaying.view?" target="main">${nowPlaying}</a></li>
 			<li class="navli"><a href="starred.view?" target="main">${starred}</a></li>
 			<li class="navli"><a href="playlists.view?" target="main">${playlists}</a></li>

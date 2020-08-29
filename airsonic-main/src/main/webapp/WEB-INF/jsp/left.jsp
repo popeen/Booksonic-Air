@@ -6,6 +6,7 @@
     <script type="text/javascript" src="<c:url value='/script/utils.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/dwr/engine.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/dwr/interface/playlistService.js'/>"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script type="text/javascript" language="javascript">
 
         function init() {
@@ -27,6 +28,9 @@
 </head>
 
 <body class="bgcolor2 leftframe" onload="init()">
+
+
+    
 <a name="top"></a>
 
 <c:if test="${fn:length(model.musicFolders) > 1}">

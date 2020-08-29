@@ -29,7 +29,72 @@
 
 <body class="bgcolor2 playlistframe" onload="init()">
 
-<span id="dummy-animation-target" style="max-width: ${model.autoHide ? 50 : 150}px; display: none"></span>
+    <div id="player" style="visibility:hidden;">
+        <audio id="audioPlayer" data-mejsoptions='{"alwaysShowControls": false, "enableKeyboard": false}' tabindex="-1" />
+    </div>
+    
+    <div style="width: 100%">
+        <img src="" id="coverart" style="margin: auto; display:block"/>
+    </div>
+    
+    <div style="width: 100%; margin-top:10px; text-align: center;">
+        <i class="fas fa-tachometer-alt" onclick ='$("#playbackSpeed").toggle()' style="cursor: pointer;"></i>
+        <!--Bookmarks in webplayer not implemented yet-->
+        <!--<i class="fas fa-bookmark" style="margin-left:10px;" style="cursor: pointer;"></i>-->
+    </div>
+        
+       
+    <div id="playbackSpeed" style="display:none">
+        <span id="playbackSpeedDisplay" class="mejs__time">1.0</span>
+        <input type="range" id="playbackSpeedInput" value="1.0" min="0.5" max="2.0" step="0.1" oninput="playbackSpeedUpdate()" onchange="playbackSpeedUpdate()">
+    </div>
+    
+    
+    <div style="width: 100%">
+    
+        <div style="margin: auto; width: 90px; margin-top: 20px; display:block">
+            <i id="previousButton" class="fa fa-step-backward" onclick="onPrevious()" style="cursor:pointer"></i>
+            
+            <span id="startButton" class="fa-stack fa-lg" onclick="onStart()" style="cursor: pointer; display: none;">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-play-circle fa-stack-2x"></i>
+            </span>
+            <span id="stopButton" class="fa-stack fa-lg" onclick="onStop()" style="cursor: pointer;">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-pause-circle fa-stack-2x"></i>
+            </span>
+
+            <i id="nextButton" class="fa fa-step-forward" onclick="onNext(false)" style="cursor:pointer"></i>
+        </div>
+        
+        <input type="range" id="playbackSpeedInput" style="width: 90%; display: block; margin: auto" value="30" min="0" max="100" step="1" oninput="playbackSpeedUpdate()" onchange="playbackSpeedUpdate()">
+        <div>1:01:31 / 15:01:31</div>
+        
+        
+                        <table class="music indent" style="cursor:pointer">
+                        
+    <tbody id="playlistBody">
+        <tr id="pattern" style="display:none;margin:0;padding:0;border:0">
+            <td class="fit">
+                <img id="removeSong" onclick="onRemove(this.id.substring(10) - 1)" src="<spring:theme code='removeImage'/>"
+                     style="cursor:pointer; height:18px;" alt="<fmt:message key='playlist.remove'/>" title="<fmt:message key='playlist.remove'/>"></td>
+
+
+            <td class="truncate">
+                
+                        <img id="currentImage" src="<spring:theme code='currentImage'/>" alt="" style="display:none;padding-right: 0.5em"> <span class="detail" id="trackNumber">1</span>. <span class="songTitle"><a id="titleUrl" href="javascript:void(0)">Title</a></span>
+            </td>
+
+            <c:if test="${model.visibility.durationVisible}">
+                <td class="fit rightalign"><span id="duration" class="detail">Duration</span></td>
+            </c:if>
+        </tr>
+    </tbody>
+</table>
+
+    </div>
+    
+<!--<span id="dummy-animation-target" style="max-width: ${model.autoHide ? 50 : 150}px; display: none"></span>-->
 
 <script type="text/javascript" language="javascript">
 
@@ -225,6 +290,7 @@
         playbackSpeedUpdate();
         $("#startButton").hide();
         $("#stopButton").show();
+        $("#coverart").attr('src', "coverArt.view?id=" + currentSong.id + "&size=300");
     }
 
     function playbackSpeedUpdate(){
@@ -945,6 +1011,7 @@
 
 </script>
 
+<!--
 <c:choose>
     <c:when test="${model.player.javaJukebox}">
         <div id="javaJukeboxPlayerControlBarContainer">
@@ -962,6 +1029,7 @@
 
 
                         <div style="margin: auto; display: inline-block; max-width:100%;">
+                        
                             <i id="previousButton" class="fa fa-step-backward" onclick="onPrevious()" style="cursor:pointer"></i>
                             
                             <span id="startButton" class="fa-stack fa-lg" onclick="onStart()" style="cursor:pointer">
@@ -977,15 +1045,16 @@
 
                             <span id="playbackSpeedDisplay" class="mejs__time">1.0</span>
                             <input type="range" id="playbackSpeedInput" value="1.0" min="0.5" max="2.0" step="0.1" oninput="playbackSpeedUpdate()" onchange="playbackSpeedUpdate()">
+                            
                         </div>
-                    
+                        
+
                     </c:if>
                     
-                    
-                    
+                    -->
                     
                     <!--TODO, this is for jukebox etc, needs to be fixed as well later -->
-                    
+                    <!--
                     <c:if test="${model.player.web}">
                         <div id="castPlayer" style="display: none">
                             <div style="float:left">
@@ -1021,7 +1090,7 @@
                     
                     <!--TODO, jukebox stop -->
 
-        </div>
+      <!--  </div>
     </c:otherwise>
 </c:choose>
 
@@ -1031,7 +1100,7 @@
 <div style="clear:both"></div>
 <p id="empty"><em><fmt:message key="playlist.empty"/></em></p>
 <!---->
-<c:if test="${model.user.settingsRole and fn:length(model.players) gt 1}">
+<!--<c:if test="${model.user.settingsRole and fn:length(model.players) gt 1}">
     <td style="padding-right: 5px"><select name="player" onchange="location='playQueue.view?player=' + options[selectedIndex].value;">
         <c:forEach items="${model.players}" var="player">
             <option ${player.id eq model.player.id ? "selected" : ""} value="${player.id}">${player.shortDescription}</option>
@@ -1089,7 +1158,7 @@
     </optgroup>
 </select>
 <!---->
-
+<!--
 <table class="music indent" style="cursor:pointer">
     <tbody id="playlistBody">
         <tr id="pattern" style="display:none;margin:0;padding:0;border:0">
@@ -1160,5 +1229,5 @@
     };
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
-
+-->
 </body></html>
