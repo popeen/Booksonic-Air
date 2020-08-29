@@ -322,9 +322,7 @@
 
         // Whenever playback starts, show a notification for the current playing song.
         $('#audioPlayer').on("playing", onPlaying);
-        
-        $('#audioPlayer').on("timeupdate", onTimeupdate);
-        
+                
     }
 
     function getPlayQueue() {
@@ -373,14 +371,7 @@
         $("#startButton").show();
         $("#stopButton").hide();
     }
-
-    /**
-     * Timeupdate
-     */
-    function onTimeupdate() {
-        $("#playbackSpeedDisplay").innerHTML = $('#audioPlayer').get(0).currentTime;
-    }
-
+        
     /**
      * Toggle play/pause
      *
