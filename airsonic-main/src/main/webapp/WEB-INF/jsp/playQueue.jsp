@@ -32,7 +32,7 @@
     
     
     <div style="width: 100%; margin-top: 20px;">
-        <img src="" id="coverart" style="margin: auto; display:block"/>
+        <img src="" id="coverart" style="margin: auto; display:block" onclick="onToggleStartStop()"/>
     </div>
     
     <div style="width: 100%; margin-top:10px; text-align: center;">
