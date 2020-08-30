@@ -191,7 +191,6 @@
             <c:if test="${model.user.streamRole}">
                 <c:if test="${needSep}">|</c:if>
                 <span class="header"><a href="javascript:playAll()"><fmt:message key="main.playall"/></a></span> |
-                <span class="header"><a href="javascript:playRandom(0)"><fmt:message key="main.playrandom"/></a></span> |
                 <span class="header"><a href="javascript:addAll(0)"><fmt:message key="main.addall"/></a></span>
                 <c:set var="needSep" value="true"/>
             </c:if>

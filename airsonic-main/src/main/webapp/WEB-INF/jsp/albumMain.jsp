@@ -192,13 +192,6 @@
                 <c:set var="needSep" value="true"/>
             </c:if>
 
-            <c:if test="${model.user.streamRole}">
-                <c:if test="${needSep}">|</c:if>
-                <span class="header"><a href="javascript:playAll()"><fmt:message key="main.playall"/></a></span> |
-                <span class="header"><a href="javascript:addAll()"><fmt:message key="main.addall"/></a></span>
-                <c:set var="needSep" value="true"/>
-            </c:if>
-
             <c:if test="${model.user.downloadRole}">
                 <c:if test="${needSep}">|</c:if>
                 <span class="header"><a href="${downloadUrl}"><fmt:message key="main.downloadall"/></a></span>
