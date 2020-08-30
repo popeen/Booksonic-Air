@@ -11,6 +11,40 @@
     <script type="text/javascript" src="<c:url value='/dwr/interface/multiService.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/script/jquery.fancyzoom.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/script/utils.js'/>"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    
+        <style>
+            body{
+                font-family: Verdana, Tahoma, Geneva, arial, sans-serif;
+            }
+            #left .coverart{
+                margin: 20px !important;
+                width: 200px !important;
+            }
+            #left{
+                float:left;
+                width: 250px;
+            }
+            #right{
+                display: table;
+                margin-right: 20px;
+            }
+            .inline{
+               display: inline;
+            }
+            #people{
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            #description{
+                border: 1px solid black;
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+            #search ul li{
+                list-style-type: none;
+            }
+        </style>
 
 </head><body class="mainframe bgcolor1" onload="init();">
 
@@ -158,6 +192,227 @@
     }
 </script>
 
+
+
+
+
+
+
+
+
+
+
+
+<div id="wrapper">
+            <div id="left">
+                <c:if test="${model.navigateUpAllowed}">
+                    <sub:url value="main.view" var="upUrl">
+                        <sub:param name="id" value="${model.parent.id}"/>
+                    </sub:url>
+                    <div><a href="${upUrl}"><i class="fas fa-arrow-left"></i></a></div>
+                    <c:set var="needSep" value="true"/>
+                </c:if>
+            
+                <c:import url="coverArt.jsp">
+                    <c:param name="albumId" value="${model.dir.id}"/>
+                    <c:param name="coverArtSize" value="200"/>
+                    <c:param name="showZoom" value="false"/>
+                    <c:param name="showChange" value="false"/>
+                </c:import>
+                <div id="search">
+                    <b>Search:</b><br/>
+                    <a href='https://www.audible.com/search?title=<c:out value="${model.album}" />&author_author=<c:out value="${model.artist}" />' target="_blank">Audible</a><br/>
+                    <a href='https://www.goodreads.com/search?q=<c:out value="${model.album}" /> <c:out value="${model.artist}" />' target="_blank">Goodreads</a><br/>
+                    <a href='https://www.google.com/search?q=intitle:<c:out value="${model.album}" /> inauthor:<c:out value="${model.artist}&tbm=bks" />' target="_blank">Google</a>
+                </div>
+                <div style="margin-top: 20px; display:none;">
+                    <a href="#">Edit Book</a>
+                </div>
+            </div>
+            <div id="right">
+                <h1><c:out value="${model.album}" /></h1>
+                
+                <div id="people">
+                    <div id="author" class="inline"><b>Author:</b> <a href='main.view?id=<c:out value="${model.ancestors[0].id}" />'><c:out value="${model.artist}" /></a></div>
+                    <div id="narrator" class="inline"><b>Narrator:</b> <c:out value="${model.files[0].narrator}" /></div>
+                </div>
+                
+                
+    <div id="description"><c:out value="${model.files[0].description}" /></div>
+                
+                
+                
+<table cellpadding="0" style="width:100%;padding-top: 0.3em;padding-bottom: 1em">
+    <tr style="vertical-align:top;">
+        <td style="vertical-align:top;padding-bottom: 1em">
+            <table class="music" style="width: 100%">
+                <c:forEach items="${model.files}" var="song" varStatus="loopStatus">
+                    <%--@elvariable id="song" type="org.airsonic.player.domain.MediaFile"--%>
+                    <tr style="margin:0;padding:0;border:0">
+                        <c:import url="playButtons.jsp">
+                            <c:param name="id" value="${song.id}"/>
+                            <c:param name="video" value="${song.video and model.player.web}"/>
+                            <c:param name="playEnabled" value="${model.user.streamRole and not model.partyMode}"/>
+                            <c:param name="addEnabled" value="${model.user.streamRole and (not model.partyMode or not song.directory)}"/>
+                            <c:param name="starEnabled" value="true"/>
+                            <c:param name="starred" value="${not empty song.starredDate}"/>
+                            <c:param name="asTable" value="true"/>
+                        </c:import>
+
+                        <c:if test="${model.visibility.trackNumberVisible}">
+                            <td class="fit rightalign">
+                                <span class="detail">${song.trackNumber}</span>
+                            </td>
+                        </c:if>
+
+                        <td class="truncate">
+                            <span class="songTitle" title="${fn:escapeXml(song.title)}">${fn:escapeXml(song.title)}</span>
+                        </td>
+
+                        <c:if test="${model.visibility.albumVisible}">
+                            <td class="truncate">
+                                <span class="detail" title="${fn:escapeXml(song.albumName)}">${fn:escapeXml(song.albumName)}</span>
+                            </td>
+                        </c:if>
+
+                        <c:if test="${model.visibility.artistVisible}">
+                            <td class="truncate">
+                                <span class="detail" title="${fn:escapeXml(song.artist)}">${fn:escapeXml(song.artist)}</span>
+                            </td>
+                        </c:if>
+
+                        <c:if test="${model.visibility.genreVisible}">
+                            <td class="fit rightalign">
+                                <span class="detail">${fn:escapeXml(song.genre)}</span>
+                            </td>
+                        </c:if>
+
+                        <c:if test="${model.visibility.yearVisible}">
+                            <td class="fit rightalign">
+                                <span class="detail">${song.year}</span>
+                            </td>
+                        </c:if>
+
+                        <c:if test="${model.visibility.formatVisible}">
+                            <td class="fit rightalign">
+                                <span class="detail">${fn:toLowerCase(song.format)}</span>
+                            </td>
+                        </c:if>
+
+                        <c:if test="${model.visibility.fileSizeVisible}">
+                            <td class="fit rightalign">
+                                <span class="detail"><sub:formatBytes bytes="${song.fileSize}"/></span>
+                            </td>
+                        </c:if>
+
+                        <c:if test="${model.visibility.durationVisible}">
+                            <td class="fit rightalign">
+                                <span class="detail">${song.durationString}</span>
+                            </td>
+                        </c:if>
+
+                        <c:if test="${model.visibility.bitRateVisible}">
+                            <td class="fit rightalign">
+                                <span class="detail">
+                                    <c:if test="${not empty song.bitRate}">
+                                        ${song.bitRate} Kbps ${song.variableBitRate ? "vbr" : ""}
+                                    </c:if>
+                                    <c:if test="${song.video and not empty song.width and not empty song.height}">
+                                        (${song.width}x${song.height})
+                                    </c:if>
+                                </span>
+                            </td>
+                        </c:if>
+                    </tr>
+                </c:forEach>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="vertical-align:top;height: 100%">
+            <table class="music indent">
+                <c:forEach items="${model.subDirs}" var="child" varStatus="loopStatus">
+                    <sub:url value="main.view" var="albumUrl">
+                        <sub:param name="id" value="${child.id}"/>
+                    </sub:url>
+                    <tr>
+                        <c:import url="playButtons.jsp">
+                            <c:param name="id" value="${child.id}"/>
+                            <c:param name="playEnabled" value="${model.user.streamRole and not model.partyModeEnabled}"/>
+                            <c:param name="addEnabled" value="${model.user.streamRole and not model.partyModeEnabled}"/>
+                            <c:param name="asTable" value="true"/>
+                        </c:import>
+                        <td class="truncate"><a href="${albumUrl}" title="${fn:escapeXml(child.name)}">${fn:escapeXml(child.name)}</a></td>
+                        <td></td>
+                    </tr>
+                </c:forEach>
+                <c:if test="${model.viewAsList}">
+                    <c:forEach items="${model.siblingAlbums}" var="album" varStatus="loopStatus">
+                        <tr>
+                            <c:import url="playButtons.jsp">
+                                <c:param name="id" value="${album.id}"/>
+                                <c:param name="playEnabled" value="${model.user.streamRole and not model.partyModeEnabled}"/>
+                                <c:param name="addEnabled" value="${model.user.streamRole and not model.partyModeEnabled}"/>
+                                <c:param name="asTable" value="true"/>
+                            </c:import>
+                            <td class="truncate"><a href="main.view?id=${album.id}" title="${fn:escapeXml(album.name)}">${fn:escapeXml(album.name)}</a></td>
+                            <td class="fit rightalign detail">${album.year}</td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
+            </table>
+        </td>
+
+    </tr>
+</table>
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
 <div style="float:left">
     <h1>
         <img id="starImage" src="<spring:theme code='${not empty model.dir.starredDate ? \'ratingOnImage\' : \'ratingOffImage\'}'/>"
@@ -278,146 +533,8 @@
     }
 </script>
 
-<c:forEach items="${model.files}" var="song" varStatus="loopStatus" end="0">
-    <%--@elvariable id="song" type="net.sourceforge.subsonic.domain.MediaFile"--%>
-    <div style="border: 1px solid #aaa;background: #eee;padding: 5px;margin:  15px;margin-left: 0px;">${fn:escapeXml(song.description)}<br/><b>Narrated by:</b> ${fn:escapeXml(song.narrator)}</div>
-</c:forEach>
 
-<table cellpadding="0" style="width:100%;padding-top: 0.3em;padding-bottom: 1em">
-    <tr style="vertical-align:top;">
-        <td style="vertical-align:top;padding-bottom: 1em">
-            <table class="music" style="width: 100%">
-                <c:forEach items="${model.files}" var="song" varStatus="loopStatus">
-                    <%--@elvariable id="song" type="org.airsonic.player.domain.MediaFile"--%>
-                    <tr style="margin:0;padding:0;border:0">
-                        <c:import url="playButtons.jsp">
-                            <c:param name="id" value="${song.id}"/>
-                            <c:param name="video" value="${song.video and model.player.web}"/>
-                            <c:param name="playEnabled" value="${model.user.streamRole and not model.partyMode}"/>
-                            <c:param name="addEnabled" value="${model.user.streamRole and (not model.partyMode or not song.directory)}"/>
-                            <c:param name="starEnabled" value="true"/>
-                            <c:param name="starred" value="${not empty song.starredDate}"/>
-                            <c:param name="asTable" value="true"/>
-                        </c:import>
 
-                        <c:if test="${model.visibility.trackNumberVisible}">
-                            <td class="fit rightalign">
-                                <span class="detail">${song.trackNumber}</span>
-                            </td>
-                        </c:if>
-
-                        <td class="truncate">
-                            <span class="songTitle" title="${fn:escapeXml(song.title)}">${fn:escapeXml(song.title)}</span>
-                        </td>
-
-                        <c:if test="${model.visibility.albumVisible}">
-                            <td class="truncate">
-                                <span class="detail" title="${fn:escapeXml(song.albumName)}">${fn:escapeXml(song.albumName)}</span>
-                            </td>
-                        </c:if>
-
-                        <c:if test="${model.visibility.artistVisible}">
-                            <td class="truncate">
-                                <span class="detail" title="${fn:escapeXml(song.artist)}">${fn:escapeXml(song.artist)}</span>
-                            </td>
-                        </c:if>
-
-                        <c:if test="${model.visibility.genreVisible}">
-                            <td class="fit rightalign">
-                                <span class="detail">${fn:escapeXml(song.genre)}</span>
-                            </td>
-                        </c:if>
-
-                        <c:if test="${model.visibility.yearVisible}">
-                            <td class="fit rightalign">
-                                <span class="detail">${song.year}</span>
-                            </td>
-                        </c:if>
-
-                        <c:if test="${model.visibility.formatVisible}">
-                            <td class="fit rightalign">
-                                <span class="detail">${fn:toLowerCase(song.format)}</span>
-                            </td>
-                        </c:if>
-
-                        <c:if test="${model.visibility.fileSizeVisible}">
-                            <td class="fit rightalign">
-                                <span class="detail"><sub:formatBytes bytes="${song.fileSize}"/></span>
-                            </td>
-                        </c:if>
-
-                        <c:if test="${model.visibility.durationVisible}">
-                            <td class="fit rightalign">
-                                <span class="detail">${song.durationString}</span>
-                            </td>
-                        </c:if>
-
-                        <c:if test="${model.visibility.bitRateVisible}">
-                            <td class="fit rightalign">
-                                <span class="detail">
-                                    <c:if test="${not empty song.bitRate}">
-                                        ${song.bitRate} Kbps ${song.variableBitRate ? "vbr" : ""}
-                                    </c:if>
-                                    <c:if test="${song.video and not empty song.width and not empty song.height}">
-                                        (${song.width}x${song.height})
-                                    </c:if>
-                                </span>
-                            </td>
-                        </c:if>
-                    </tr>
-                </c:forEach>
-            </table>
-        </td>
-
-        <td class="fit" style="vertical-align:top;" rowspan="3">
-            <div class="albumThumb">
-                <c:import url="coverArt.jsp">
-                    <c:param name="albumId" value="${model.dir.id}"/>
-                    <c:param name="coverArtSize" value="${model.coverArtSizeLarge}"/>
-                    <c:param name="showZoom" value="true"/>
-                    <c:param name="showChange" value="${model.user.coverArtRole}"/>
-                </c:import>
-            </div>
-        </td>
-    </tr>
-
-    <tr>
-        <td style="vertical-align:top;height: 100%">
-            <table class="music indent">
-                <c:forEach items="${model.subDirs}" var="child" varStatus="loopStatus">
-                    <sub:url value="main.view" var="albumUrl">
-                        <sub:param name="id" value="${child.id}"/>
-                    </sub:url>
-                    <tr>
-                        <c:import url="playButtons.jsp">
-                            <c:param name="id" value="${child.id}"/>
-                            <c:param name="playEnabled" value="${model.user.streamRole and not model.partyModeEnabled}"/>
-                            <c:param name="addEnabled" value="${model.user.streamRole and not model.partyModeEnabled}"/>
-                            <c:param name="asTable" value="true"/>
-                        </c:import>
-                        <td class="truncate"><a href="${albumUrl}" title="${fn:escapeXml(child.name)}">${fn:escapeXml(child.name)}</a></td>
-                        <td></td>
-                    </tr>
-                </c:forEach>
-                <c:if test="${model.viewAsList}">
-                    <c:forEach items="${model.siblingAlbums}" var="album" varStatus="loopStatus">
-                        <tr>
-                            <c:import url="playButtons.jsp">
-                                <c:param name="id" value="${album.id}"/>
-                                <c:param name="playEnabled" value="${model.user.streamRole and not model.partyModeEnabled}"/>
-                                <c:param name="addEnabled" value="${model.user.streamRole and not model.partyModeEnabled}"/>
-                                <c:param name="asTable" value="true"/>
-                            </c:import>
-                            <td class="truncate"><a href="main.view?id=${album.id}" title="${fn:escapeXml(album.name)}">${fn:escapeXml(album.name)}</a></td>
-                            <td class="fit rightalign detail">${album.year}</td>
-                        </tr>
-                    </c:forEach>
-                </c:if>
-            </table>
-        </td>
-
-    </tr>
-</table>
 <c:if test="${model.thereIsMore}">
     <input id="showAllButton" class="albumOverflowButton" type="button" value="<fmt:message key='main.showall'/>" onclick="showAllAlbums()">
 </c:if>
@@ -460,7 +577,7 @@
 <div id="dialog-select-playlist" title="<fmt:message key='main.addtoplaylist.title'/>" style="display: none;">
     <p><fmt:message key="main.addtoplaylist.text"/></p>
     <div id="dialog-select-playlist-list"></div>
-</div>
+</div>-->
 
 </body>
 </html>
