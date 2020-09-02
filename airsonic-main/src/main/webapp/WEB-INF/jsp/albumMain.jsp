@@ -41,8 +41,23 @@
                 padding: 10px;
                 margin-bottom: 20px;
             }
+            #search{
+                margin-top: 20px;
+            }
             #search ul li{
                 list-style-type: none;
+            }
+            
+            .linkBtn{
+                display:block;
+                background:#3184A5;
+                text-align:center;
+                width: 180px;
+                margin:auto;
+                padding: 10px;
+                color:#fff !important;
+                text-decoration: none !important;
+                font-weight: bold  !important;
             }
         </style>
 
@@ -219,6 +234,10 @@
                     <c:param name="showZoom" value="false"/>
                     <c:param name="showChange" value="false"/>
                 </c:import>
+                <div>
+                <a href="#" onclick='top.playQueue.onPlay(<c:out value="${model.files[0].id}" />); return false;' class="linkBtn">Play</a><br/>
+                <a href='${downloadUrl}' class="linkBtn">Download</a>
+                </div>
                 <div id="search">
                     <b>Search:</b><br/>
                     <a href='https://www.audible.com/search?title=<c:out value="${model.album}" />&author_author=<c:out value="${model.artist}" />' target="_blank">Audible</a><br/>

@@ -68,7 +68,7 @@
         </div>
         
         <div id="player">
-            <audio id="audioPlayer" data-mejsoptions='{"alwaysShowControls": false, "enableKeyboard": false, "features": ["current", "progress", "duration"]}' tabindex="-1" />
+            <audio id="audioPlayer" data-mejsoptions='{"alwaysShowControls": false, "enableKeyboard": false, "features": ["current", "progress", "duration", "volume"]}' tabindex="-1" />
         </div>
         
         <table class="music indent" style="cursor:pointer">
