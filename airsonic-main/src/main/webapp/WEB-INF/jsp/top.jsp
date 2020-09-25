@@ -77,6 +77,7 @@
 	<fmt:message key="top.more" var="more"/>
 	<fmt:message key="top.help" var="help"/>
 	<fmt:message key="top.search" var="search"/>
+    <fmt:message key="top.logout" var="logout"/>
 
 	<h1 class="logo">Booksonic</h1>
 	<nav>
@@ -95,6 +96,7 @@
 			<li class="navli"><a href="status.view?" target="main">${status}</a></li>
 			<li class="navli"><a href="more.view?" target="main">${more}</a></li>
 			<li class="navli"><a href="help.view?" target="main">${help}</a></li>
+			<li class="navli"><a href="login.view?logout" target="_top">${logout}</a></li>
 		</ul>
 	</nav>
 				
