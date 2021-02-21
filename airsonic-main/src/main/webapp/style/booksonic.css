@@ -38,3 +38,8 @@
 .mainframe{
 	padding-top: 15px;
 }
+
+#right{
+    width: -moz-available;
+    width: -webkit-fill-available;
+}
