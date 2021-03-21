@@ -1,6 +1,15 @@
 
 Booksonic Air
 ========
+[![release-github-shield]][booksonic-air-link]
+[![downloads-air-shield]][booksonic-air-link]
+[![issues-air-shield]](issues)
+[![License-air][license-shield]](LICENSE.md)
+[![reddit-shield]][reddit-link]
+[![twitter-shield]][twitter-link]
+
+[![Buy me a coffee][buymeacoffee-shield]][buymeacoffee-link]
+
 
 What is Booksonic?
 -----------------
@@ -84,4 +93,29 @@ All pull requests are welcome to any of the Booksonic projects
 Community
 ---------
 If you have any questions or ideas, come visit us at [/r/booksonic](https://reddit.com/r/booksonic) over on Reddit
+
+[booksonic-air-link]: https://github.com/popeen/Booksonic-Air
+[booksonic-app-link]: https://github.com/popeen/Booksonic-App
+
+[release-github-shield]: https://img.shields.io/badge/released-github-green.svg
+[googleplay-shield]: https://img.shields.io/badge/released-google%20play-green.svg
+[googleplay-link]: https://play.google.com/store/apps/details?id=github.popeen.dsub
+
+[googleplaydownloads-shield]: https://img.shields.io/badge/google%20play%20downloads-10.000%2B-blue.svg
+[downloads-air-shield]: https://img.shields.io/github/downloads/popeen/booksonic-air/total
+
+[issues-shield]: https://img.shields.io/github/issues-raw/popeen/Booksonic-App.svg
+[issues-air-shield]: https://img.shields.io/github/issues-raw/popeen/Booksonic-Air.svg
+
+[license-shield]: https://img.shields.io/github/license/popeen/Booksonic-App.svg
+[license-air-shield]: https://img.shields.io/github/license/popeen/Booksonic-Air.svg
+
+[reddit-shield]: https://img.shields.io/reddit/subreddit-subscribers/booksonic?style=social
+[reddit-link]: https://reddit.com/r/booksonic
+
+[twitter-shield]: https://img.shields.io/twitter/follow/popeencom?style=social
+[twitter-link]: https://twitter.com/popeencom
+
+[buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg
+[buymeacoffee-link]: https://www.buymeacoffee.com/popeen
 
