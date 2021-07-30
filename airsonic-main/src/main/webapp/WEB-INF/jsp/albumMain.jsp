@@ -165,7 +165,6 @@
     function playAll() {
         top.playQueue.onPlay(${model.dir.id});
     }
-    }
 
     function addAll() {
         top.playQueue.onAdd(${model.dir.id});
