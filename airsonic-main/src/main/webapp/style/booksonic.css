@@ -42,4 +42,5 @@
 #right{
     width: -moz-available;
     width: -webkit-fill-available;
+    max-width:80%;
 }
