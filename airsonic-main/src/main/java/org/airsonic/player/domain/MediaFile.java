@@ -166,7 +166,7 @@ public class MediaFile {
             } else if (new File(opfpath).exists()) {
                 return getDescriptionFromOpf(opfpath);
             } else if (new File(txtpath).exists()) {
-                return getDescriptionFromtxt(txtpath);
+                return getFromtxt(txtpath, "No description available");
             } else {
                 throw new Exception("No description available");
             }
@@ -200,11 +200,11 @@ public class MediaFile {
         }
     }
 
-    private String getDescriptionFromtxt(String path) {
+    private String getFromtxt(String path, String defaultValue) {
         try {
             return readFile(path, StandardCharsets.UTF_8);
         } catch (Exception e) {
-            return "No description availiable";
+            return defaultValue;
         }
     }
 
@@ -226,15 +226,24 @@ public class MediaFile {
     }
 
     public String getLanguage() {
-        String fullPath = FilenameUtils.getFullPath(this.getPath() + System.getProperty("file.separator"));
-        String language = "Unknown";
         try {
-            File languageFile = new File(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "lang.txt");
+            String tempPath = "";
+            if (isDirectory()) {
+                tempPath = path + File.separator;
+            } else {
+                tempPath = path.substring(0,path.lastIndexOf(File.separator)) + File.separator;
+            }
 
-            return readFile(languageFile.getAbsolutePath(), StandardCharsets.UTF_8);
+            String langpath = tempPath + "lang.txt";
 
-        } catch (Exception e) { }
-        return language;
+            if (new File(langpath).exists()) {
+                return getFromtxt(langpath, "Unknown");
+            } else {
+                throw new Exception("Unknown");
+            }
+        } catch (Exception e) {
+            return "Unknown";
+        }
     }
 
     public MediaType getMediaType() {
@@ -246,20 +255,27 @@ public class MediaFile {
     }
 
     public String getNarrator() {
-        String fullPath = FilenameUtils.getFullPath(this.getPath() + System.getProperty("file.separator"));
-        String narrator = "Unknown";
         try {
-            File readerFile = new File(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "reader.txt");
-            File narratorFile = new File(path.substring(0,path.lastIndexOf(File.separator)) + File.separator + "narrator.txt");
-
-            if (narratorFile.exists()) {
-                return readFile(narratorFile.getAbsolutePath(), StandardCharsets.UTF_8);
-            } else if (readerFile.exists()) {
-                return readFile(readerFile.getAbsolutePath(), StandardCharsets.UTF_8);
+            String tempPath = "";
+            if (isDirectory()) {
+                tempPath = path + File.separator;
+            } else {
+                tempPath = path.substring(0,path.lastIndexOf(File.separator)) + File.separator;
             }
 
-        } catch (Exception e) { }
-        return narrator;
+            String narratorpath = tempPath + "narrator.txt";
+            String readerpath = tempPath + "reader.txt";
+
+            if (new File(narratorpath).exists()) {
+                return getFromtxt(narratorpath, "Unknown");
+            } else if (new File(readerpath).exists()) {
+                return getFromtxt(readerpath, "Unknown");
+            } else {
+                throw new Exception("Unknown");
+            }
+        } catch (Exception e) {
+            return "Unknown";
+        }
     }
 
     public boolean isVideo() {
