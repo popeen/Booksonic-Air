@@ -5,7 +5,7 @@
     <parent>
         <relativePath>../../pom.xml</relativePath>
         <artifactId>airsonic</artifactId>
-        <version>2112.1.0</version>
+        <version>2112.2.0</version>
         <groupId>org.airsonic.player</groupId>
     </parent>
     <packaging>pom</packaging>
@@ -16,7 +16,7 @@
         <dependency>
             <groupId>org.airsonic.player</groupId>
             <artifactId>airsonic-main</artifactId>
-            <version>2112.1.0</version>
+            <version>2112.2.0</version>
             <type>war</type>
         </dependency>
     </dependencies>
