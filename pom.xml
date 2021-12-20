@@ -16,7 +16,7 @@
     <properties>
         <failOnDependencyWarning>true</failOnDependencyWarning>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <cxf.version>3.3.6</cxf.version>
+        <cxf.version>3.3.12</cxf.version>
         <jackson.version>2.11.0</jackson.version>
         <tomcat.version>9.0.56</tomcat.version>
         <docker.container.repo>airsonic/airsonic</docker.container.repo>
