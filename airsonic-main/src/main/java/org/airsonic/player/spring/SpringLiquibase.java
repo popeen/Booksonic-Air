@@ -8,7 +8,7 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
 import liquibase.resource.ResourceAccessor;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,7 @@ public class SpringLiquibase extends liquibase.integration.spring.SpringLiquibas
         DatabaseFactory factory = DatabaseFactory.getInstance();
         overrideHsqlDbImplementation(factory);
         Database database = factory.findCorrectDatabaseImplementation(liquibaseConnection);
-        if (StringUtils.trimToNull(this.defaultSchema) != null) {
+        if (StringUtil.trimToNull(this.defaultSchema) != null) {
             database.setDefaultSchemaName(this.defaultSchema);
         }
         return database;
