@@ -129,10 +129,12 @@
                 <artifactId>jackson-core</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
+			<!-- Normally we want to use ${jackson.version} but jackson-databind requires newer 
+				version for CVE and that version is not available for the other jackson artifacts -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
+                <version>2.13.2.1</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
