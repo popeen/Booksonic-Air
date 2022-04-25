@@ -3,3 +3,6 @@
 
 # English
 en
+
+# French
+fr
