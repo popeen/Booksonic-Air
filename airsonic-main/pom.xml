@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.airsonic.player</groupId>
         <artifactId>airsonic</artifactId>
-        <version>2201.1.0</version>
+        <version>2205.1.0</version>
     </parent>
 
     <properties>
@@ -548,8 +548,14 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.12</version>
+            <version>42.3.3</version>
             <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                  <groupId>org.checkerframework</groupId>
+                  <artifactId>checker-qual</artifactId>
+                </exclusion>
+              </exclusions>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
